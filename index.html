@@ -47,43 +47,49 @@
   .cart-count{background:var(--green);color:#fff;font-size:.75rem;font-weight:700;min-width:20px;height:20px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 5px}
 
   /* Hero */
-  .hero{background:linear-gradient(100deg,rgba(8,47,94,.85) 0%,rgba(10,63,126,.55) 45%,rgba(12,79,158,.30) 100%),url('hero.jpg') center/cover no-repeat;color:#fff;overflow:hidden;position:relative}
-  .hero-inner{max-width:1200px;margin:0 auto;padding:56px 20px 88px;position:relative;z-index:1;text-align:center}
-  .hero h1,.hero p{text-shadow:0 2px 26px rgba(4,16,31,.55)}
-  .hero .kicker{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:6px 16px;border-radius:999px;font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:22px}
-  .hero h1{font-size:clamp(1.9rem,4.5vw,3.1rem);font-weight:700;max-width:760px;margin:0 auto 18px}
-  .hero p{font-size:clamp(1rem,2vw,1.15rem);color:rgba(255,255,255,.85);max-width:640px;margin:0 auto 32px}
-  .btn-green{display:inline-block;background:var(--green);color:#fff;font-weight:600;font-size:1rem;padding:13px 34px;border-radius:8px;transition:background .15s}
-  .btn-green:hover{background:var(--green-dark);color:#fff}
+  .hero{background:linear-gradient(95deg,rgba(8,47,94,.93) 0%,rgba(8,47,94,.74) 34%,rgba(10,63,126,.34) 62%,rgba(12,79,158,.10) 100%),url('hero.jpg') center/cover no-repeat;color:#fff;overflow:hidden;position:relative}
+  .hero-inner{max-width:1200px;margin:0 auto;padding:84px 20px 100px;position:relative;z-index:1}
+  .hero-copy{max-width:620px}
+  .hero h1,.hero p{text-shadow:0 2px 24px rgba(4,16,31,.5)}
+  .hero .kicker{display:flex;align-items:center;gap:14px;font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:20px}
+  .hero .kicker::before{content:"";width:34px;height:2px;background:var(--green)}
+  .hero h1{font-size:clamp(2.3rem,5vw,3.7rem);font-weight:800;line-height:1.08;letter-spacing:-.02em;margin:0 0 20px}
+  .hero p{font-size:clamp(1rem,1.8vw,1.14rem);color:rgba(255,255,255,.88);max-width:520px;margin:0 0 36px}
+  .hero-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .btn-green{display:inline-block;background:var(--green);color:#fff;font-weight:700;font-size:1rem;padding:14px 34px;border-radius:10px;transition:background .15s,transform .15s}
+  .btn-green:hover{background:var(--green-dark);color:#fff;transform:translateY(-1px)}
+  .btn-hollow{display:inline-block;border:1.5px solid rgba(255,255,255,.55);color:#fff;font-weight:600;font-size:.95rem;padding:12px 26px;border-radius:10px;transition:border-color .15s,background .15s}
+  .btn-hollow:hover{border-color:#fff;background:rgba(255,255,255,.1);color:#fff}
 
   /* Flying emblem */
-  .emblem-slot{height:260px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
-  @media(max-width:700px){.emblem-slot{height:190px}}
-  .fly-logo{position:fixed;left:50%;top:0;z-index:60;pointer-events:none;transform-origin:center center;will-change:transform}
-  .fly-logo svg{display:block;width:240px;height:240px}
-  @media(max-width:700px){.fly-logo svg{width:175px;height:175px}}
+  .emblem-slot{height:110px;display:flex;align-items:center;justify-content:flex-start;margin-bottom:22px}
+  @media(max-width:700px){.emblem-slot{height:88px}}
+  .fly-logo{position:fixed;left:0;top:0;z-index:60;pointer-events:none;transform-origin:center center;will-change:transform}
+  .fly-logo svg{display:block;width:96px;height:96px}
+  @media(max-width:700px){.fly-logo svg{width:80px;height:80px}}
 
   /* Books */
-  .section{max-width:1200px;margin:0 auto;padding:64px 20px}
-  .section-head{text-align:center;margin-bottom:40px}
-  .section-head h2{font-size:clamp(1.5rem,3vw,2.1rem);color:var(--blue-deep)}
-  .section-head .rule{width:56px;height:4px;background:var(--green);border-radius:2px;margin:14px auto 0}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:26px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .15s,border-color .15s}
-  .card:hover{transform:translateY(-3px);border-color:#c9d2e6}
-  .cover{background:#eef1f7;aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;padding:22px}
-  .cover img{max-height:100%;width:auto;max-width:100%;object-fit:contain}
-  .cover .placeholder{font-weight:600;color:#a9b3c9;font-size:.85rem;text-align:center;padding:0 14px}
-  .card-body{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
-  .card-title{font-weight:600;font-size:.98rem;color:var(--ink);margin-bottom:4px}
-  .card-author{font-size:.83rem;color:var(--muted);margin-bottom:10px}
+  .section{max-width:1200px;margin:0 auto;padding:80px 20px}
+  .section-head{display:flex;align-items:baseline;gap:20px;margin-bottom:56px}
+  .section-head h2{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:800;letter-spacing:-.015em;color:var(--blue-deep);white-space:nowrap}
+  .section-head .rule{flex:1;height:1px;background:var(--line);border-radius:0;margin:0}
+  .section-head .count{font-size:.9rem;font-weight:600;color:var(--muted)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:56px 36px}
+  .card{display:flex;flex-direction:column}
+  .cover{aspect-ratio:3/4;display:flex;align-items:flex-end;justify-content:center}
+  .cover img{max-height:100%;width:auto;max-width:100%;object-fit:contain;transition:transform .25s ease}
+  .card:hover .cover img{transform:translateY(-8px)}
+  .cover .placeholder{font-weight:600;color:#a9b3c9;font-size:.9rem;text-align:center;padding:0 14px;align-self:center}
+  .card-body{padding:18px 2px 0;display:flex;flex-direction:column;flex:1;border-top:1px solid var(--line);margin-top:18px}
+  .card-title{font-weight:700;font-size:1rem;line-height:1.35;color:var(--ink);margin-bottom:3px}
+  .card-author{font-size:.85rem;color:var(--muted);margin-bottom:12px}
   .card-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
-  .price{font-weight:700;color:var(--blue-deep);font-size:1.05rem}
-  .btn-add{background:var(--blue);color:#fff;font-weight:600;font-size:.85rem;padding:9px 16px;border-radius:8px;transition:background .15s;white-space:nowrap}
-  .btn-add:hover{background:var(--blue-dark)}
-  .btn-add:disabled{background:#c4cad8;cursor:not-allowed}
-  .btn-add.added{background:var(--green)}
-  .sold-out{font-size:.85rem;font-weight:600;color:#b3392f;background:#fbeeed;padding:8px 14px;border-radius:8px;white-space:nowrap}
+  .price{font-weight:800;color:var(--blue-deep);font-size:1.02rem}
+  .btn-add{background:none;color:var(--blue);font-weight:700;font-size:.88rem;padding:8px 0;border-bottom:2px solid var(--green);border-radius:0;transition:color .15s,border-color .15s;white-space:nowrap}
+  .btn-add:hover{color:var(--green-dark);border-color:var(--green-dark)}
+  .btn-add:disabled{color:#c4cad8;border-color:#e3e7f0;cursor:not-allowed}
+  .btn-add.added{color:var(--green-dark);border-color:var(--green-dark)}
+  .sold-out{font-size:.83rem;font-weight:600;color:#b3392f;white-space:nowrap}
   .grid-status{text-align:center;color:var(--muted);padding:48px 0;font-size:.95rem}
 
   /* About */
@@ -182,11 +188,16 @@
 
 <section class="hero">
   <div class="hero-inner">
-    <div class="emblem-slot" id="emblemSlot"></div>
-    <span class="kicker">Nurture People · Inspire Change</span>
-    <h1>Empower minds, one publication at a time</h1>
-    <p>Original, well-written, contextual Islamic books — grounded in authentic methodology and written for the American Muslim. The official MAS Publishing bookstore.</p>
-    <a class="btn-green" href="#books">Browse the Books</a>
+    <div class="hero-copy">
+      <div class="emblem-slot" id="emblemSlot"></div>
+      <span class="kicker">Nurture People · Inspire Change</span>
+      <h1>Empower minds,<br>one publication at a time.</h1>
+      <p>Original, contextual Islamic books — grounded in authentic methodology, written for the American Muslim. The official MAS Publishing bookstore.</p>
+      <div class="hero-cta">
+        <a class="btn-green" href="#books">Browse the Books</a>
+        <a class="btn-hollow" href="#about">About MAS Publishing</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -195,6 +206,7 @@
     <div class="section-head">
       <h2>The Collection</h2>
       <div class="rule"></div>
+      <span class="count" id="bookCount"></span>
     </div>
     <div class="grid-status" id="gridStatus">Loading the collection…</div>
     <div class="grid" id="grid"></div>
@@ -305,6 +317,8 @@ async function loadProducts() {
       return;
     }
     status.style.display = "none";
+    const bc = document.getElementById("bookCount");
+    if (bc) bc.textContent = products.length + " titles";
     grid.innerHTML = products.map(p => {
       const v = p.variants.nodes[0] || {};
       const price = v.price ? money(v.price.amount, v.price.currencyCode) : "";
@@ -482,12 +496,15 @@ function toast(msg) {
   if (!fly || !slot || !header) return;
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let slotCY = 0, headerCY = 36, dockScale = 0.18, raf = null;
+  let slotCX = 0, targetX = 0;
   function measure() {
     const r = slot.getBoundingClientRect();
     slotCY = r.top + window.scrollY + r.height / 2;
+    slotCX = r.left + r.width / 2;
+    targetX = window.innerWidth / 2;
     headerCY = header.offsetHeight / 2;
-    const svgW = fly.querySelector("svg").getBoundingClientRect().width || 240;
-    dockScale = Math.min(48 / svgW, 0.22);
+    const svgW = fly.querySelector("svg").getBoundingClientRect().width || 96;
+    dockScale = Math.min(46 / svgW, 0.6);
     update();
   }
   const ease = p => p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
@@ -496,15 +513,16 @@ function toast(msg) {
     const rawY = slotCY - window.scrollY;
     const y = Math.max(rawY, headerCY);
     const p = travel > 0 ? Math.min(Math.max((slotCY - y) / travel, 0), 1) : 1;
+    const e = ease(p);
+    const x = slotCX + (targetX - slotCX) * e;
     if (reduced) {
-      fly.style.transform = `translate(-50%, ${y}px) translateY(-50%)` + (p >= 1 ? ` scale(${dockScale})` : "");
+      fly.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)` + (p >= 1 ? ` scale(${dockScale})` : "");
       return;
     }
-    const e = ease(p);
     const s = 1 - (1 - dockScale) * e;
-    const fold = Math.sin(p * Math.PI) * 62;
-    fly.style.transform = `translate(-50%, ${y}px) translateY(-50%) perspective(900px) rotateX(${fold}deg) scale(${s})`;
-    fly.style.opacity = 1 - Math.sin(p * Math.PI) * 0.22;
+    const fold = Math.sin(p * Math.PI) * 55;
+    fly.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%) perspective(900px) rotateX(${fold}deg) scale(${s})`;
+    fly.style.opacity = 1 - Math.sin(p * Math.PI) * 0.18;
   }
   function onScroll() {
     if (raf) return;
