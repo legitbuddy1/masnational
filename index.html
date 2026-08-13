@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAS Publishing Bookstore | Muslim American Society</title>
+<meta name="description" content="Original Islamic literature from MAS Publishing — books on tarbiya, spirituality, and Islamic work for the modern Muslim. Official bookstore, fulfilled by Mawlana Books.">
+<meta property="og:title" content="MAS Publishing Bookstore">
+<meta property="og:description" content="Empower minds one publication at a time — the official MAS Publishing bookstore.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://masnational.mawlanabooks.com">
+<link rel="icon" href="https://muslimamericansociety.org/wp-content/uploads/2021/08/fav.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* Palette per MAS Brand Book v2.1 — Pantone 286 / Pantone 369; typeface standard: DADO NEUE (Figtree as licensed-free substitute) */
+  :root{
+    --blue:#0c4f9e; --blue-dark:#0a3f7e; --blue-deep:#082f5e;
+    --green:#5bba47; --green-dark:#49a336;
+    --ink:#1c2333; --muted:#5b6478; --line:#e3e7f0;
+    --bg:#f7f8fb; --card:#ffffff;
+    --radius:14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Figtree',system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+  h1,h2,h3{font-family:'Figtree',sans-serif;line-height:1.25}
+  img{max-width:100%;display:block}
+  a{color:var(--blue);text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+  /* Header */
+  .header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+  .header-inner{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:24px}
+  .logo{height:44px;flex-shrink:0}
+  .logo img{height:100%;width:auto}
+  .header-tag{font-size:.78rem;color:var(--muted);border-left:1px solid var(--line);padding-left:14px;line-height:1.35;display:none}
+  @media(min-width:640px){.header-tag{display:block}}
+  .nav{margin-left:auto;display:flex;align-items:center;gap:22px}
+  .nav a{font-size:.92rem;font-weight:500;color:var(--ink)}
+  .nav a:hover{color:var(--blue)}
+  .nav .ext{display:none}
+  @media(min-width:760px){.nav .ext{display:inline}}
+  .cart-btn{position:relative;display:flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:600;font-size:.9rem;padding:9px 16px;border-radius:999px;transition:background .15s}
+  .cart-btn:hover{background:var(--blue-dark)}
+  .cart-count{background:var(--green);color:#fff;font-size:.75rem;font-weight:700;min-width:20px;height:20px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 5px}
+
+  /* Hero */
+  .hero{background:linear-gradient(150deg,var(--blue) 0%,var(--blue-dark) 60%,var(--blue-deep) 100%);color:#fff;overflow:hidden;position:relative}
+  .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,.05)}
+  .hero::before{content:"";position:absolute;left:-80px;bottom:-160px;width:340px;height:340px;border-radius:50%;background:rgba(108,191,76,.14)}
+  .hero-inner{max-width:1200px;margin:0 auto;padding:72px 20px 80px;position:relative;z-index:1;text-align:center}
+  .hero .kicker{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:6px 16px;border-radius:999px;font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:22px}
+  .hero h1{font-size:clamp(1.9rem,4.5vw,3.1rem);font-weight:700;max-width:760px;margin:0 auto 18px}
+  .hero p{font-size:clamp(1rem,2vw,1.15rem);color:rgba(255,255,255,.85);max-width:640px;margin:0 auto 32px}
+  .btn-green{display:inline-block;background:var(--green);color:#fff;font-family:'Figtree',sans-serif;font-weight:600;font-size:1rem;padding:13px 34px;border-radius:8px;transition:background .15s}
+  .btn-green:hover{background:var(--green-dark);color:#fff}
+
+  /* Books */
+  .section{max-width:1200px;margin:0 auto;padding:64px 20px}
+  .section-head{text-align:center;margin-bottom:40px}
+  .section-head h2{font-size:clamp(1.5rem,3vw,2.1rem);color:var(--blue-deep)}
+  .section-head .rule{width:56px;height:4px;background:var(--green);border-radius:2px;margin:14px auto 0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:26px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .15s,border-color .15s}
+  .card:hover{transform:translateY(-3px);border-color:#c9d2e6}
+  .cover{background:#eef1f7;aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;padding:22px}
+  .cover img{max-height:100%;width:auto;max-width:100%;object-fit:contain}
+  .cover .placeholder{font-family:'Figtree',sans-serif;font-weight:600;color:#a9b3c9;font-size:.85rem;text-align:center;padding:0 14px}
+  .card-body{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
+  .card-title{font-family:'Figtree',sans-serif;font-weight:600;font-size:.98rem;color:var(--ink);margin-bottom:4px}
+  .card-author{font-size:.83rem;color:var(--muted);margin-bottom:10px}
+  .card-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .price{font-family:'Figtree',sans-serif;font-weight:700;color:var(--blue-deep);font-size:1.05rem}
+  .btn-add{background:var(--blue);color:#fff;font-weight:600;font-size:.85rem;padding:9px 16px;border-radius:8px;transition:background .15s;white-space:nowrap}
+  .btn-add:hover{background:var(--blue-dark)}
+  .btn-add:disabled{background:#c4cad8;cursor:not-allowed}
+  .btn-add.added{background:var(--green)}
+  .sold-out{font-size:.85rem;font-weight:600;color:#b3392f;background:#fbeeed;padding:8px 14px;border-radius:8px;white-space:nowrap}
+  .grid-status{text-align:center;color:var(--muted);padding:48px 0;font-size:.95rem}
+
+  /* About */
+  .about{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .about-inner{max-width:1000px;margin:0 auto;padding:64px 20px;display:grid;gap:36px;grid-template-columns:1fr}
+  @media(min-width:820px){.about-inner{grid-template-columns:1fr 1fr;align-items:center}}
+  .about h2{font-size:clamp(1.4rem,2.6vw,1.9rem);color:var(--blue-deep);margin-bottom:16px}
+  .about p{color:var(--muted);margin-bottom:14px}
+  .about .links a{font-weight:600}
+  .about-quote{background:var(--bg);border-left:4px solid var(--green);border-radius:0 var(--radius) var(--radius) 0;padding:26px 28px;font-family:'Figtree',sans-serif;font-size:1.12rem;font-weight:500;color:var(--blue-dark)}
+  .about-quote .attrib{display:block;margin-top:12px;font-family:'Figtree',sans-serif;font-size:.85rem;font-weight:400;color:var(--muted)}
+
+  /* Footer */
+  .footer{background:var(--blue-deep);color:rgba(255,255,255,.8)}
+  .footer-inner{max-width:1200px;margin:0 auto;padding:48px 20px 36px;display:flex;flex-wrap:wrap;gap:32px;align-items:center;justify-content:space-between}
+  .footer img{height:52px;width:auto}
+  .footer .cols{display:flex;gap:28px;flex-wrap:wrap;font-size:.9rem}
+  .footer a{color:#fff;font-weight:500}
+  .footer a:hover{color:var(--green)}
+  .footer-base{border-top:1px solid rgba(255,255,255,.15);text-align:center;font-size:.8rem;padding:16px 20px;color:rgba(255,255,255,.55)}
+  .footer-base a{color:rgba(255,255,255,.75)}
+
+  /* Cart drawer */
+  .overlay{position:fixed;inset:0;background:rgba(21,30,52,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:90}
+  .overlay.open{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;right:0;height:100dvh;width:min(420px,100vw);background:#fff;z-index:100;transform:translateX(105%);transition:transform .25s ease;display:flex;flex-direction:column;box-shadow:-12px 0 40px rgba(21,30,52,.18)}
+  .drawer.open{transform:translateX(0)}
+  .drawer-head{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--line)}
+  .drawer-head h3{font-size:1.1rem;color:var(--blue-deep)}
+  .drawer-close{font-size:1.5rem;color:var(--muted);line-height:1;padding:4px 8px}
+  .drawer-close:hover{color:var(--ink)}
+  .drawer-body{flex:1;overflow-y:auto;padding:10px 22px}
+  .cart-empty{text-align:center;color:var(--muted);padding:60px 12px;font-size:.95rem}
+  .line{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .line-img{width:58px;flex-shrink:0;background:#eef1f7;border-radius:6px;padding:6px;display:flex;align-items:center;justify-content:center}
+  .line-img img{max-width:100%;height:auto}
+  .line-info{flex:1;min-width:0}
+  .line-title{font-weight:600;font-size:.88rem;line-height:1.35;margin-bottom:6px}
+  .line-price{font-size:.85rem;color:var(--muted)}
+  .line-ctrl{display:flex;align-items:center;gap:10px;margin-top:8px}
+  .qty{display:flex;align-items:center;border:1px solid var(--line);border-radius:8px}
+  .qty button{width:28px;height:28px;font-size:1rem;color:var(--blue);font-weight:700}
+  .qty span{min-width:26px;text-align:center;font-size:.88rem;font-weight:600}
+  .line-remove{font-size:.78rem;color:var(--muted);text-decoration:underline}
+  .line-remove:hover{color:#b3392f}
+  .drawer-foot{border-top:1px solid var(--line);padding:18px 22px 22px}
+  .subtotal{display:flex;justify-content:space-between;font-family:'Figtree',sans-serif;font-weight:600;font-size:1.05rem;margin-bottom:6px}
+  .drawer-foot .note{font-size:.78rem;color:var(--muted);margin-bottom:14px}
+  .btn-checkout{width:100%;background:var(--green);color:#fff;font-family:'Figtree',sans-serif;font-weight:600;font-size:1rem;padding:14px;border-radius:10px;transition:background .15s}
+  .btn-checkout:hover{background:var(--green-dark)}
+  .btn-checkout:disabled{background:#c4cad8}
+
+  /* Toast */
+  .toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,80px);background:var(--blue-deep);color:#fff;padding:12px 22px;border-radius:999px;font-size:.9rem;font-weight:500;opacity:0;transition:all .25s;z-index:120;pointer-events:none}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" href="#" aria-label="MAS — Muslim American Society">
+      <img src="https://muslimamericansociety.org/wp-content/uploads/2021/10/logo-updated.png" alt="MAS — Muslim American Society">
+    </a>
+    <div class="header-tag">Publishing Bookstore<br>fulfilled by Mawlana Books</div>
+    <nav class="nav">
+      <a href="#books">Books</a>
+      <a href="#about">About</a>
+      <a class="ext" href="https://muslimamericansociety.org" target="_blank" rel="noopener">muslimamericansociety.org</a>
+      <button class="cart-btn" id="cartOpen" aria-label="Open cart">
+        Cart <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="kicker">Nurture People · Inspire Change</span>
+    <h1>Empower minds, one publication at a time</h1>
+    <p>Original, well-written, contextual Islamic books — grounded in authentic methodology and written for the American Muslim. The official MAS Publishing bookstore.</p>
+    <a class="btn-green" href="#books">Browse the Books</a>
+  </div>
+</section>
+
+<main>
+  <section class="section" id="books">
+    <div class="section-head">
+      <h2>The Collection</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="grid-status" id="gridStatus">Loading the collection…</div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="about-inner">
+      <div>
+        <h2>Islamic Literature for the Modern Muslim</h2>
+        <p>MAS Publishing creates books and content that deepen our understanding and practice of Islam — the connection between faith and action, the centrality of self-development, and a charted path for practicing Islam in America.</p>
+        <p>Every purchase supports the mission of the Muslim American Society: to move people and nurture lifelong, God-centered agents of change.</p>
+        <p class="links"><a href="https://muslimamericansociety.org/publishing/" target="_blank" rel="noopener">About MAS Publishing →</a></p>
+      </div>
+      <div class="about-quote">
+        “When reading is becoming a lost art, it is more important than ever that our words and deeds are grounded in authentic, rich Islamic methodology.”
+        <span class="attrib">— MAS Publishing</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <img src="https://muslimamericansociety.org/wp-content/uploads/2021/08/white-mas_logo-2021.png" alt="MAS">
+    <div class="cols">
+      <a href="https://muslimamericansociety.org" target="_blank" rel="noopener">Muslim American Society</a>
+      <a href="https://muslimamericansociety.org/publishing/" target="_blank" rel="noopener">MAS Publishing</a>
+      <a href="https://muslimamericansociety.org/contact/" target="_blank" rel="noopener">Contact</a>
+      <a href="https://mawlanabooks.com" target="_blank" rel="noopener">Mawlana Books</a>
+    </div>
+  </div>
+  <div class="footer-base">
+    © <span id="year"></span> Muslim American Society · Bookstore operated &amp; fulfilled by <a href="https://mawlanabooks.com" target="_blank" rel="noopener">Mawlana Books</a>
+  </div>
+</footer>
+
+<!-- Cart -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Shopping cart">
+  <div class="drawer-head">
+    <h3>Your Cart</h3>
+    <button class="drawer-close" id="cartClose" aria-label="Close cart">×</button>
+  </div>
+  <div class="drawer-body" id="drawerBody">
+    <div class="cart-empty">Your cart is empty.</div>
+  </div>
+  <div class="drawer-foot">
+    <div class="subtotal"><span>Subtotal</span><span id="subtotal">$0.00</span></div>
+    <div class="note">Shipping &amp; taxes calculated at checkout. Secure checkout by Shopify.</div>
+    <button class="btn-checkout" id="checkoutBtn" disabled>Checkout</button>
+  </div>
+</aside>
+<div class="toast" id="toast"></div>
+
+<script>
+const CONFIG = {
+  domain: "413ea3.myshopify.com",
+  token: "2c7d74e71601465d7425f417e3a2b381",
+  apiVersion: "2025-07",
+  collection: "mas-publishing",
+  source: "mas-microsite"
+};
+
+const API = `https://${CONFIG.domain}/api/${CONFIG.apiVersion}/graphql.json`;
+
+async function gql(query, variables = {}) {
+  const res = await fetch(API, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Shopify-Storefront-Access-Token": CONFIG.token
+    },
+    body: JSON.stringify({ query, variables })
+  });
+  const json = await res.json();
+  if (json.errors) throw new Error(json.errors.map(e => e.message).join("; "));
+  return json.data;
+}
+
+const money = (amt, cur = "USD") =>
+  new Intl.NumberFormat("en-US", { style: "currency", currency: cur }).format(parseFloat(amt));
+
+/* ---------- Products ---------- */
+const PRODUCTS_QUERY = `
+query Products($handle: String!) {
+  collection(handle: $handle) {
+    products(first: 50) {
+      nodes {
+        id title handle availableForSale
+        featuredImage { url altText }
+        authors: metafield(namespace: "custom", key: "author") { value }
+        variants(first: 1) {
+          nodes { id availableForSale price { amount currencyCode } }
+        }
+      }
+    }
+  }
+}`;
+
+async function loadProducts() {
+  const status = document.getElementById("gridStatus");
+  const grid = document.getElementById("grid");
+  try {
+    const data = await gql(PRODUCTS_QUERY, { handle: CONFIG.collection });
+    const products = data.collection?.products?.nodes || [];
+    if (!products.length) {
+      status.textContent = "New titles are on the way — check back soon.";
+      return;
+    }
+    status.style.display = "none";
+    grid.innerHTML = products.map(p => {
+      const v = p.variants.nodes[0] || {};
+      const price = v.price ? money(v.price.amount, v.price.currencyCode) : "";
+      let authors = "";
+      try { authors = JSON.parse(p.authors?.value || "[]").join(", "); } catch (e) {}
+      const img = p.featuredImage
+        ? `<img loading="lazy" src="${p.featuredImage.url.split("?")[0]}?width=480" alt="${(p.featuredImage.altText || p.title).replace(/"/g, "&quot;")}">`
+        : `<div class="placeholder">${p.title}</div>`;
+      const action = (p.availableForSale && v.availableForSale)
+        ? `<button class="btn-add" data-variant="${v.id}" data-title="${p.title.replace(/"/g, "&quot;")}">Add to Cart</button>`
+        : `<span class="sold-out">Sold out</span>`;
+      return `<article class="card">
+        <div class="cover">${img}</div>
+        <div class="card-body">
+          <h3 class="card-title">${p.title}</h3>
+          <div class="card-author">${authors ? "by " + authors : "&nbsp;"}</div>
+          <div class="card-foot"><span class="price">${price}</span>${action}</div>
+        </div>
+      </article>`;
+    }).join("");
+    grid.addEventListener("click", e => {
+      const btn = e.target.closest(".btn-add");
+      if (btn) addToCart(btn);
+    });
+  } catch (err) {
+    status.textContent = "Couldn't load the collection right now — please refresh.";
+    console.error(err);
+  }
+}
+
+/* ---------- Cart ---------- */
+const CART_FRAGMENT = `
+fragment CartFields on Cart {
+  id totalQuantity checkoutUrl
+  cost { subtotalAmount { amount currencyCode } }
+  lines(first: 50) {
+    nodes {
+      id quantity
+      merchandise {
+        ... on ProductVariant {
+          id price { amount currencyCode }
+          product { title featuredImage { url } }
+        }
+      }
+    }
+  }
+}`;
+
+let cart = null;
+
+async function getCart() {
+  const saved = localStorage.getItem("mas_cart_id");
+  if (saved) {
+    try {
+      const data = await gql(`query($id: ID!){ cart(id: $id){ ...CartFields } } ${CART_FRAGMENT}`, { id: saved });
+      if (data.cart) { cart = data.cart; renderCart(); return cart; }
+    } catch (e) {}
+    localStorage.removeItem("mas_cart_id");
+  }
+  return null;
+}
+
+async function createCart(lines) {
+  const data = await gql(
+    `mutation($input: CartInput!){ cartCreate(input: $input){ cart { ...CartFields } userErrors { message } } } ${CART_FRAGMENT}`,
+    { input: { lines, attributes: [{ key: "_source", value: CONFIG.source }] } }
+  );
+  cart = data.cartCreate.cart;
+  localStorage.setItem("mas_cart_id", cart.id);
+  return cart;
+}
+
+async function addToCart(btn) {
+  const variantId = btn.dataset.variant;
+  btn.disabled = true; const orig = btn.textContent; btn.textContent = "Adding…";
+  try {
+    if (!cart) await getCart();
+    if (!cart) {
+      await createCart([{ merchandiseId: variantId, quantity: 1, attributes: [{ key: "_source", value: CONFIG.source }] }]);
+    } else {
+      const data = await gql(
+        `mutation($cartId: ID!, $lines: [CartLineInput!]!){ cartLinesAdd(cartId: $cartId, lines: $lines){ cart { ...CartFields } userErrors { message } } } ${CART_FRAGMENT}`,
+        { cartId: cart.id, lines: [{ merchandiseId: variantId, quantity: 1, attributes: [{ key: "_source", value: CONFIG.source }] }] }
+      );
+      cart = data.cartLinesAdd.cart;
+    }
+    renderCart();
+    btn.textContent = "Added ✓"; btn.classList.add("added");
+    toast(`${btn.dataset.title} added to cart`);
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove("added"); btn.disabled = false; }, 1400);
+    openDrawer();
+  } catch (err) {
+    console.error(err); toast("Couldn't add to cart — try again");
+    btn.textContent = orig; btn.disabled = false;
+  }
+}
+
+async function updateLine(lineId, quantity) {
+  const mutation = quantity <= 0
+    ? `mutation($cartId: ID!, $ids: [ID!]!){ cartLinesRemove(cartId: $cartId, lineIds: $ids){ cart { ...CartFields } } } ${CART_FRAGMENT}`
+    : `mutation($cartId: ID!, $lines: [CartLineUpdateInput!]!){ cartLinesUpdate(cartId: $cartId, lines: $lines){ cart { ...CartFields } } } ${CART_FRAGMENT}`;
+  const vars = quantity <= 0
+    ? { cartId: cart.id, ids: [lineId] }
+    : { cartId: cart.id, lines: [{ id: lineId, quantity }] };
+  const data = await gql(mutation, vars);
+  cart = quantity <= 0 ? data.cartLinesRemove.cart : data.cartLinesUpdate.cart;
+  renderCart();
+}
+
+function renderCart() {
+  const count = document.getElementById("cartCount");
+  const body = document.getElementById("drawerBody");
+  const subtotal = document.getElementById("subtotal");
+  const checkout = document.getElementById("checkoutBtn");
+  const qty = cart?.totalQuantity || 0;
+  count.textContent = qty;
+  if (!cart || !cart.lines.nodes.length) {
+    body.innerHTML = `<div class="cart-empty">Your cart is empty.</div>`;
+    subtotal.textContent = "$0.00"; checkout.disabled = true;
+    return;
+  }
+  body.innerHTML = cart.lines.nodes.map(l => {
+    const m = l.merchandise;
+    const img = m.product.featuredImage ? `<img src="${m.product.featuredImage.url.split("?")[0]}?width=120" alt="">` : "";
+    return `<div class="line">
+      <div class="line-img">${img}</div>
+      <div class="line-info">
+        <div class="line-title">${m.product.title}</div>
+        <div class="line-price">${money(m.price.amount, m.price.currencyCode)}</div>
+        <div class="line-ctrl">
+          <div class="qty">
+            <button data-line="${l.id}" data-q="${l.quantity - 1}" aria-label="Decrease">−</button>
+            <span>${l.quantity}</span>
+            <button data-line="${l.id}" data-q="${l.quantity + 1}" aria-label="Increase">+</button>
+          </div>
+          <button class="line-remove" data-line="${l.id}" data-q="0">Remove</button>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+  subtotal.textContent = money(cart.cost.subtotalAmount.amount, cart.cost.subtotalAmount.currencyCode);
+  checkout.disabled = false;
+}
+
+/* ---------- Drawer UI ---------- */
+const drawer = document.getElementById("drawer");
+const overlay = document.getElementById("overlay");
+function openDrawer(){ drawer.classList.add("open"); overlay.classList.add("open"); }
+function closeDrawer(){ drawer.classList.remove("open"); overlay.classList.remove("open"); }
+document.getElementById("cartOpen").addEventListener("click", openDrawer);
+document.getElementById("cartClose").addEventListener("click", closeDrawer);
+overlay.addEventListener("click", closeDrawer);
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(); });
+document.getElementById("drawerBody").addEventListener("click", e => {
+  const btn = e.target.closest("[data-line]");
+  if (btn) updateLine(btn.dataset.line, parseInt(btn.dataset.q, 10));
+});
+document.getElementById("checkoutBtn").addEventListener("click", () => {
+  if (cart?.checkoutUrl) window.location.href = cart.checkoutUrl;
+});
+
+let toastTimer;
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
+}
+
+document.getElementById("year").textContent = new Date().getFullYear();
+loadProducts();
+getCart();
+</script>
+</body>
+</html>
