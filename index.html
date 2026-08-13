@@ -6,132 +6,148 @@
 <title>MAS Publishing Bookstore | Muslim American Society</title>
 <meta name="description" content="Original Islamic literature from MAS Publishing — books on tarbiya, spirituality, and Islamic work for the modern Muslim. Official bookstore, fulfilled by Mawlana Books.">
 <meta property="og:title" content="MAS Publishing Bookstore">
-<meta property="og:description" content="Empower minds one publication at a time — the official MAS Publishing bookstore.">
+<meta property="og:description" content="Empower minds, one publication at a time — the official MAS Publishing bookstore.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://masnational.mawlanabooks.com">
 <link rel="icon" href="https://muslimamericansociety.org/wp-content/uploads/2021/08/fav.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@1,9..144,300..600&display=swap" rel="stylesheet">
 <style>
-  /* Palette per MAS Brand Book v2.1 — Pantone 286 / Pantone 369; typeface standard: DADO NEUE (Figtree as licensed-free substitute) */
   :root{
-    --blue:#0c4f9e; --blue-dark:#0a3f7e; --blue-deep:#082f5e;
-    --green:#5bba47; --green-dark:#49a336;
-    --ink:#1c2333; --muted:#5b6478; --line:#e3e7f0;
-    --bg:#f7f8fb; --card:#ffffff;
-    --radius:14px;
+    --bg0:#04101f; --bg1:#081c33; --bg2:#0d2946; --bg3:#030b17;
+    --line:rgba(159,178,204,.14); --line-strong:rgba(159,178,204,.28);
+    --text:#eef3fa; --sub:#9fb2cc; --faint:#64789a;
+    --blue:#0c4f9e; --blue-bright:#4b8fe0;
+    --green:#5bba47; --green-dark:#4aa338;
+    --gold:#c9a24f; --gold-soft:#d8b56a;
+    --radius:16px;
+    --serif:'Fraunces',Georgia,serif;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{font-family:'Figtree',system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
-  h1,h2,h3{font-family:'Figtree',sans-serif;line-height:1.25}
+  body{font-family:'Figtree',system-ui,sans-serif;color:var(--text);background:var(--bg0);line-height:1.65}
+  ::selection{background:rgba(201,162,79,.35)}
   img{max-width:100%;display:block}
-  a{color:var(--blue);text-decoration:none}
-  button{font-family:inherit;cursor:pointer;border:none;background:none}
+  a{color:var(--blue-bright);text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  em.gild{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--gold-soft)}
 
-  /* Header */
-  .header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
-  .header-inner{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:24px}
-  .logo{height:44px;flex-shrink:0}
+  .stars{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'><g fill='none' stroke='%23c9a24f' stroke-opacity='0.09'><rect x='49' y='49' width='52' height='52'/><rect x='49' y='49' width='52' height='52' transform='rotate(45 75 75)'/></g><circle cx='75' cy='75' r='1.6' fill='%23c9a24f' fill-opacity='0.16'/></svg>")}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  .grid .card:nth-child(4n+2).reveal{transition-delay:.07s}
+  .grid .card:nth-child(4n+3).reveal{transition-delay:.14s}
+  .grid .card:nth-child(4n+4).reveal{transition-delay:.21s}
+  @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+  .header{position:sticky;top:0;z-index:50;background:rgba(4,16,31,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .header-inner{max-width:1240px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;gap:24px}
+  .logo{height:40px;flex-shrink:0}
   .logo img{height:100%;width:auto}
-  .header-tag{font-size:.78rem;color:var(--muted);border-left:1px solid var(--line);padding-left:14px;line-height:1.35;display:none}
-  @media(min-width:640px){.header-tag{display:block}}
-  .nav{margin-left:auto;display:flex;align-items:center;gap:22px}
-  .nav a{font-size:.92rem;font-weight:500;color:var(--ink)}
-  .nav a:hover{color:var(--blue)}
+  .header-tag{font-family:var(--serif);font-style:italic;font-size:.88rem;color:var(--faint);border-left:1px solid var(--line);padding-left:16px;line-height:1.4;display:none}
+  @media(min-width:660px){.header-tag{display:block}}
+  .nav{margin-left:auto;display:flex;align-items:center;gap:26px}
+  .nav a{font-size:.92rem;font-weight:500;color:var(--sub);transition:color .15s}
+  .nav a:hover{color:var(--text)}
   .nav .ext{display:none}
-  @media(min-width:760px){.nav .ext{display:inline}}
-  .cart-btn{position:relative;display:flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:600;font-size:.9rem;padding:9px 16px;border-radius:999px;transition:background .15s}
-  .cart-btn:hover{background:var(--blue-dark)}
-  .cart-count{background:var(--green);color:#fff;font-size:.75rem;font-weight:700;min-width:20px;height:20px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 5px}
+  @media(min-width:800px){.nav .ext{display:inline}}
+  .cart-btn{position:relative;display:flex;align-items:center;gap:9px;background:var(--green);color:#06230a;font-weight:700;font-size:.9rem;padding:10px 18px;border-radius:999px;transition:background .15s,transform .15s}
+  .cart-btn:hover{background:#6cc95a;transform:translateY(-1px)}
+  .cart-count{background:#06230a;color:#9fe08f;font-size:.75rem;font-weight:700;min-width:21px;height:21px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 6px}
 
-  /* Hero */
-  .hero{background:linear-gradient(150deg,var(--blue) 0%,var(--blue-dark) 60%,var(--blue-deep) 100%);color:#fff;overflow:hidden;position:relative}
-  .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,.05)}
-  .hero::before{content:"";position:absolute;left:-80px;bottom:-160px;width:340px;height:340px;border-radius:50%;background:rgba(108,191,76,.14)}
-  .hero-inner{max-width:1200px;margin:0 auto;padding:72px 20px 80px;position:relative;z-index:1;text-align:center}
-  .hero .kicker{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:6px 16px;border-radius:999px;font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:22px}
-  .hero h1{font-size:clamp(1.9rem,4.5vw,3.1rem);font-weight:700;max-width:760px;margin:0 auto 18px}
-  .hero p{font-size:clamp(1rem,2vw,1.15rem);color:rgba(255,255,255,.85);max-width:640px;margin:0 auto 32px}
-  .btn-green{display:inline-block;background:var(--green);color:#fff;font-family:'Figtree',sans-serif;font-weight:600;font-size:1rem;padding:13px 34px;border-radius:8px;transition:background .15s}
-  .btn-green:hover{background:var(--green-dark);color:#fff}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:0;background:radial-gradient(ellipse 90% 60% at 50% -10%,rgba(12,79,158,.5),transparent 65%),radial-gradient(ellipse 40% 30% at 85% 100%,rgba(91,186,71,.12),transparent 70%);pointer-events:none}
+  .hero-inner{position:relative;max-width:1240px;margin:0 auto;padding:110px 24px 120px;text-align:center;z-index:1}
+  .kicker{display:inline-flex;align-items:center;gap:16px;font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--gold);margin-bottom:28px}
+  .kicker::before,.kicker::after{content:"";width:34px;height:1px;background:rgba(201,162,79,.5)}
+  .hero h1{font-size:clamp(2.3rem,5.6vw,4rem);font-weight:800;letter-spacing:-.02em;line-height:1.12;max-width:840px;margin:0 auto 10px}
+  .hero h1 .gild{font-weight:340;letter-spacing:0;display:block;font-size:.94em}
+  .hero p{font-size:clamp(1rem,1.9vw,1.16rem);color:var(--sub);max-width:620px;margin:26px auto 40px}
+  .hero-cta{display:flex;gap:18px;justify-content:center;align-items:center;flex-wrap:wrap}
+  .btn-green{display:inline-block;background:var(--green);color:#06230a;font-weight:700;font-size:1rem;padding:15px 38px;border-radius:12px;transition:background .15s,transform .15s}
+  .btn-green:hover{background:#6cc95a;color:#06230a;transform:translateY(-2px)}
+  .btn-ghost{font-family:var(--serif);font-style:italic;font-size:1.02rem;color:var(--sub);border-bottom:1px solid var(--line-strong);padding-bottom:3px;transition:color .15s,border-color .15s}
+  .btn-ghost:hover{color:var(--gold-soft);border-color:var(--gold)}
 
-  /* Books */
-  .section{max-width:1200px;margin:0 auto;padding:64px 20px}
-  .section-head{text-align:center;margin-bottom:40px}
-  .section-head h2{font-size:clamp(1.5rem,3vw,2.1rem);color:var(--blue-deep)}
-  .section-head .rule{width:56px;height:4px;background:var(--green);border-radius:2px;margin:14px auto 0}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:26px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .15s,border-color .15s}
-  .card:hover{transform:translateY(-3px);border-color:#c9d2e6}
-  .cover{background:#eef1f7;aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;padding:22px}
-  .cover img{max-height:100%;width:auto;max-width:100%;object-fit:contain}
-  .cover .placeholder{font-family:'Figtree',sans-serif;font-weight:600;color:#a9b3c9;font-size:.85rem;text-align:center;padding:0 14px}
-  .card-body{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
-  .card-title{font-family:'Figtree',sans-serif;font-weight:600;font-size:.98rem;color:var(--ink);margin-bottom:4px}
-  .card-author{font-size:.83rem;color:var(--muted);margin-bottom:10px}
+  .section{max-width:1240px;margin:0 auto;padding:96px 24px}
+  .section-head{display:flex;align-items:baseline;gap:22px;margin-bottom:52px}
+  .section-head .num{font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--gold);opacity:.85}
+  .section-head h2{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:800;letter-spacing:-.015em}
+  .section-head h2 .gild{font-weight:340}
+  .section-head .rule{flex:1;height:1px;background:linear-gradient(90deg,var(--line-strong),transparent)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:28px}
+  .card{background:var(--bg1);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .25s ease,border-color .25s ease,background .25s ease}
+  .card:hover{transform:translateY(-6px);border-color:rgba(201,162,79,.4);background:#0a2039}
+  .cover{background:linear-gradient(180deg,var(--bg2),#0a2138);aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;padding:26px;position:relative}
+  .cover img{max-height:100%;width:auto;max-width:100%;object-fit:contain;transition:transform .3s ease}
+  .card:hover .cover img{transform:scale(1.035)}
+  .cover .placeholder{font-family:var(--serif);font-style:italic;color:var(--faint);font-size:.95rem;text-align:center;padding:0 16px}
+  .card-body{padding:20px 22px 22px;display:flex;flex-direction:column;flex:1}
+  .card-title{font-weight:700;font-size:1rem;line-height:1.35;margin-bottom:5px}
+  .card-author{font-family:var(--serif);font-style:italic;font-size:.92rem;color:var(--gold);opacity:.9;margin-bottom:14px}
   .card-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
-  .price{font-family:'Figtree',sans-serif;font-weight:700;color:var(--blue-deep);font-size:1.05rem}
-  .btn-add{background:var(--blue);color:#fff;font-weight:600;font-size:.85rem;padding:9px 16px;border-radius:8px;transition:background .15s;white-space:nowrap}
-  .btn-add:hover{background:var(--blue-dark)}
-  .btn-add:disabled{background:#c4cad8;cursor:not-allowed}
-  .btn-add.added{background:var(--green)}
-  .sold-out{font-size:.85rem;font-weight:600;color:#b3392f;background:#fbeeed;padding:8px 14px;border-radius:8px;white-space:nowrap}
-  .grid-status{text-align:center;color:var(--muted);padding:48px 0;font-size:.95rem}
+  .price{font-weight:800;font-size:1.1rem;letter-spacing:.01em}
+  .btn-add{background:transparent;color:#8fd57f;font-weight:700;font-size:.85rem;padding:10px 16px;border-radius:10px;border:1px solid rgba(91,186,71,.5);transition:all .15s;white-space:nowrap}
+  .btn-add:hover{background:var(--green);color:#06230a;border-color:var(--green)}
+  .btn-add:disabled{opacity:.45;cursor:not-allowed}
+  .btn-add.added{background:var(--green);color:#06230a;border-color:var(--green)}
+  .sold-out{font-size:.83rem;font-weight:600;color:#ff9d93;background:rgba(226,75,74,.12);padding:9px 14px;border-radius:10px;white-space:nowrap}
+  .grid-status{text-align:center;color:var(--faint);padding:56px 0;font-family:var(--serif);font-style:italic;font-size:1.05rem}
 
-  /* About */
-  .about{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .about-inner{max-width:1000px;margin:0 auto;padding:64px 20px;display:grid;gap:36px;grid-template-columns:1fr}
-  @media(min-width:820px){.about-inner{grid-template-columns:1fr 1fr;align-items:center}}
-  .about h2{font-size:clamp(1.4rem,2.6vw,1.9rem);color:var(--blue-deep);margin-bottom:16px}
-  .about p{color:var(--muted);margin-bottom:14px}
-  .about .links a{font-weight:600}
-  .about-quote{background:var(--bg);border-left:4px solid var(--green);border-radius:0 var(--radius) var(--radius) 0;padding:26px 28px;font-family:'Figtree',sans-serif;font-size:1.12rem;font-weight:500;color:var(--blue-dark)}
-  .about-quote .attrib{display:block;margin-top:12px;font-family:'Figtree',sans-serif;font-size:.85rem;font-weight:400;color:var(--muted)}
+  .about{background:var(--bg1);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .about-inner{position:relative;max-width:1080px;margin:0 auto;padding:96px 24px;display:grid;gap:48px;grid-template-columns:1fr;z-index:1}
+  @media(min-width:840px){.about-inner{grid-template-columns:1.1fr 1fr;align-items:center}}
+  .about h2{font-size:clamp(1.5rem,2.8vw,2.1rem);font-weight:800;letter-spacing:-.015em;margin-bottom:20px}
+  .about h2 .gild{font-weight:340}
+  .about p{color:var(--sub);margin-bottom:16px}
+  .about .links a{font-weight:600;color:var(--blue-bright)}
+  .about .links a:hover{color:var(--gold-soft)}
+  .about-quote{font-family:var(--serif);font-style:italic;font-weight:340;font-size:clamp(1.2rem,2.2vw,1.5rem);line-height:1.55;color:var(--gold-soft);border-left:2px solid rgba(201,162,79,.45);padding:10px 0 10px 30px}
+  .about-quote .attrib{display:block;margin-top:18px;font-family:'Figtree',sans-serif;font-style:normal;font-size:.85rem;font-weight:500;color:var(--faint);letter-spacing:.04em}
 
-  /* Footer */
-  .footer{background:var(--blue-deep);color:rgba(255,255,255,.8)}
-  .footer-inner{max-width:1200px;margin:0 auto;padding:48px 20px 36px;display:flex;flex-wrap:wrap;gap:32px;align-items:center;justify-content:space-between}
-  .footer img{height:52px;width:auto}
-  .footer .cols{display:flex;gap:28px;flex-wrap:wrap;font-size:.9rem}
-  .footer a{color:#fff;font-weight:500}
-  .footer a:hover{color:var(--green)}
-  .footer-base{border-top:1px solid rgba(255,255,255,.15);text-align:center;font-size:.8rem;padding:16px 20px;color:rgba(255,255,255,.55)}
-  .footer-base a{color:rgba(255,255,255,.75)}
+  .footer{background:var(--bg3);border-top:1px solid rgba(201,162,79,.22)}
+  .footer-inner{max-width:1240px;margin:0 auto;padding:56px 24px 40px;display:flex;flex-wrap:wrap;gap:36px;align-items:center;justify-content:space-between}
+  .footer img{height:50px;width:auto}
+  .footer .cols{display:flex;gap:30px;flex-wrap:wrap;font-size:.9rem}
+  .footer a{color:var(--sub);font-weight:500;transition:color .15s}
+  .footer a:hover{color:var(--gold-soft)}
+  .footer-base{border-top:1px solid var(--line);text-align:center;font-size:.8rem;padding:18px 24px;color:var(--faint)}
+  .footer-base a{color:var(--sub)}
+  .footer-tag{width:100%;text-align:center;font-family:var(--serif);font-style:italic;color:var(--faint);font-size:1rem;margin-top:-8px}
 
-  /* Cart drawer */
-  .overlay{position:fixed;inset:0;background:rgba(21,30,52,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:90}
+  .overlay{position:fixed;inset:0;background:rgba(2,8,16,.66);opacity:0;pointer-events:none;transition:opacity .2s;z-index:90}
   .overlay.open{opacity:1;pointer-events:auto}
-  .drawer{position:fixed;top:0;right:0;height:100dvh;width:min(420px,100vw);background:#fff;z-index:100;transform:translateX(105%);transition:transform .25s ease;display:flex;flex-direction:column;box-shadow:-12px 0 40px rgba(21,30,52,.18)}
+  .drawer{position:fixed;top:0;right:0;height:100dvh;width:min(430px,100vw);background:var(--bg1);border-left:1px solid var(--line-strong);z-index:100;transform:translateX(105%);transition:transform .28s ease;display:flex;flex-direction:column}
   .drawer.open{transform:translateX(0)}
-  .drawer-head{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--line)}
-  .drawer-head h3{font-size:1.1rem;color:var(--blue-deep)}
-  .drawer-close{font-size:1.5rem;color:var(--muted);line-height:1;padding:4px 8px}
-  .drawer-close:hover{color:var(--ink)}
-  .drawer-body{flex:1;overflow-y:auto;padding:10px 22px}
-  .cart-empty{text-align:center;color:var(--muted);padding:60px 12px;font-size:.95rem}
-  .line{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
-  .line-img{width:58px;flex-shrink:0;background:#eef1f7;border-radius:6px;padding:6px;display:flex;align-items:center;justify-content:center}
+  .drawer-head{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--line)}
+  .drawer-head h3{font-size:1.15rem;font-weight:700}
+  .drawer-head h3 .gild{font-weight:340}
+  .drawer-close{font-size:1.6rem;color:var(--faint);line-height:1;padding:4px 8px;transition:color .15s}
+  .drawer-close:hover{color:var(--text)}
+  .drawer-body{flex:1;overflow-y:auto;padding:10px 24px}
+  .cart-empty{text-align:center;color:var(--faint);padding:64px 12px;font-family:var(--serif);font-style:italic;font-size:1.05rem}
+  .line{display:flex;gap:15px;padding:18px 0;border-bottom:1px solid var(--line)}
+  .line-img{width:58px;flex-shrink:0;background:var(--bg2);border-radius:8px;padding:6px;display:flex;align-items:center;justify-content:center}
   .line-img img{max-width:100%;height:auto}
   .line-info{flex:1;min-width:0}
-  .line-title{font-weight:600;font-size:.88rem;line-height:1.35;margin-bottom:6px}
-  .line-price{font-size:.85rem;color:var(--muted)}
-  .line-ctrl{display:flex;align-items:center;gap:10px;margin-top:8px}
-  .qty{display:flex;align-items:center;border:1px solid var(--line);border-radius:8px}
-  .qty button{width:28px;height:28px;font-size:1rem;color:var(--blue);font-weight:700}
+  .line-title{font-weight:600;font-size:.9rem;line-height:1.35;margin-bottom:5px}
+  .line-price{font-size:.86rem;color:var(--sub)}
+  .line-ctrl{display:flex;align-items:center;gap:12px;margin-top:9px}
+  .qty{display:flex;align-items:center;border:1px solid var(--line-strong);border-radius:9px}
+  .qty button{width:29px;height:29px;font-size:1rem;color:#8fd57f;font-weight:700}
   .qty span{min-width:26px;text-align:center;font-size:.88rem;font-weight:600}
-  .line-remove{font-size:.78rem;color:var(--muted);text-decoration:underline}
-  .line-remove:hover{color:#b3392f}
-  .drawer-foot{border-top:1px solid var(--line);padding:18px 22px 22px}
-  .subtotal{display:flex;justify-content:space-between;font-family:'Figtree',sans-serif;font-weight:600;font-size:1.05rem;margin-bottom:6px}
-  .drawer-foot .note{font-size:.78rem;color:var(--muted);margin-bottom:14px}
-  .btn-checkout{width:100%;background:var(--green);color:#fff;font-family:'Figtree',sans-serif;font-weight:600;font-size:1rem;padding:14px;border-radius:10px;transition:background .15s}
-  .btn-checkout:hover{background:var(--green-dark)}
-  .btn-checkout:disabled{background:#c4cad8}
+  .line-remove{font-size:.78rem;color:var(--faint);text-decoration:underline;transition:color .15s}
+  .line-remove:hover{color:#ff9d93}
+  .drawer-foot{border-top:1px solid var(--line);padding:20px 24px 24px}
+  .subtotal{display:flex;justify-content:space-between;font-weight:700;font-size:1.08rem;margin-bottom:6px}
+  .drawer-foot .note{font-size:.78rem;color:var(--faint);margin-bottom:16px}
+  .btn-checkout{width:100%;background:var(--green);color:#06230a;font-weight:800;font-size:1rem;padding:15px;border-radius:12px;transition:background .15s}
+  .btn-checkout:hover{background:#6cc95a}
+  .btn-checkout:disabled{background:#22354d;color:var(--faint)}
 
-  /* Toast */
-  .toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,80px);background:var(--blue-deep);color:#fff;padding:12px 22px;border-radius:999px;font-size:.9rem;font-weight:500;opacity:0;transition:all .25s;z-index:120;pointer-events:none}
+  .toast{position:fixed;bottom:26px;left:50%;transform:translate(-50%,80px);background:var(--bg2);border:1px solid rgba(201,162,79,.45);color:var(--text);padding:13px 24px;border-radius:999px;font-size:.9rem;font-weight:500;opacity:0;transition:all .25s;z-index:120;pointer-events:none}
   .toast.show{opacity:1;transform:translate(-50%,0)}
 </style>
 </head>
@@ -140,7 +156,7 @@
 <header class="header">
   <div class="header-inner">
     <a class="logo" href="#" aria-label="MAS — Muslim American Society">
-      <img src="https://muslimamericansociety.org/wp-content/uploads/2021/10/logo-updated.png" alt="MAS — Muslim American Society">
+      <img src="https://muslimamericansociety.org/wp-content/uploads/2021/08/white-mas_logo-2021.png" alt="MAS — Muslim American Society">
     </a>
     <div class="header-tag">Publishing Bookstore<br>fulfilled by Mawlana Books</div>
     <nav class="nav">
@@ -154,36 +170,41 @@
   </div>
 </header>
 
-<section class="hero">
+<section class="hero stars">
+  <div class="glow"></div>
   <div class="hero-inner">
-    <span class="kicker">Nurture People · Inspire Change</span>
-    <h1>Empower minds, one publication at a time</h1>
-    <p>Original, well-written, contextual Islamic books — grounded in authentic methodology and written for the American Muslim. The official MAS Publishing bookstore.</p>
-    <a class="btn-green" href="#books">Browse the Books</a>
+    <span class="kicker">Nurture people &middot; Inspire change</span>
+    <h1>Empower minds, <em class="gild">one publication at a time.</em></h1>
+    <p>Original, contextual Islamic books — grounded in authentic methodology, written for the American Muslim. The official MAS Publishing bookstore.</p>
+    <div class="hero-cta">
+      <a class="btn-green" href="#books">Browse the Books</a>
+      <a class="btn-ghost" href="#about">about MAS Publishing</a>
+    </div>
   </div>
 </section>
 
 <main>
   <section class="section" id="books">
-    <div class="section-head">
-      <h2>The Collection</h2>
+    <div class="section-head reveal">
+      <span class="num">i.</span>
+      <h2>The <em class="gild">Collection</em></h2>
       <div class="rule"></div>
     </div>
-    <div class="grid-status" id="gridStatus">Loading the collection…</div>
+    <div class="grid-status" id="gridStatus">Opening the library&hellip;</div>
     <div class="grid" id="grid"></div>
   </section>
 
-  <section class="about" id="about">
+  <section class="about stars" id="about">
     <div class="about-inner">
-      <div>
-        <h2>Islamic Literature for the Modern Muslim</h2>
+      <div class="reveal">
+        <h2>Islamic literature for the <em class="gild">modern Muslim</em></h2>
         <p>MAS Publishing creates books and content that deepen our understanding and practice of Islam — the connection between faith and action, the centrality of self-development, and a charted path for practicing Islam in America.</p>
         <p>Every purchase supports the mission of the Muslim American Society: to move people and nurture lifelong, God-centered agents of change.</p>
         <p class="links"><a href="https://muslimamericansociety.org/publishing/" target="_blank" rel="noopener">About MAS Publishing →</a></p>
       </div>
-      <div class="about-quote">
-        “When reading is becoming a lost art, it is more important than ever that our words and deeds are grounded in authentic, rich Islamic methodology.”
-        <span class="attrib">— MAS Publishing</span>
+      <div class="about-quote reveal">
+        When reading is becoming a lost art, it is more important than ever that our words and deeds are grounded in authentic, rich Islamic methodology.
+        <span class="attrib">— MAS PUBLISHING</span>
       </div>
     </div>
   </section>
@@ -198,17 +219,17 @@
       <a href="https://muslimamericansociety.org/contact/" target="_blank" rel="noopener">Contact</a>
       <a href="https://mawlanabooks.com" target="_blank" rel="noopener">Mawlana Books</a>
     </div>
+    <div class="footer-tag">Empower minds, one publication at a time.</div>
   </div>
   <div class="footer-base">
     © <span id="year"></span> Muslim American Society · Bookstore operated &amp; fulfilled by <a href="https://mawlanabooks.com" target="_blank" rel="noopener">Mawlana Books</a>
   </div>
 </footer>
 
-<!-- Cart -->
 <div class="overlay" id="overlay"></div>
 <aside class="drawer" id="drawer" aria-label="Shopping cart">
   <div class="drawer-head">
-    <h3>Your Cart</h3>
+    <h3>Your <em class="gild">Cart</em></h3>
     <button class="drawer-close" id="cartClose" aria-label="Close cart">×</button>
   </div>
   <div class="drawer-body" id="drawerBody">
@@ -221,7 +242,6 @@
   </div>
 </aside>
 <div class="toast" id="toast"></div>
-
 <script>
 const CONFIG = {
   domain: "413ea3.myshopify.com",
@@ -250,7 +270,20 @@ async function gql(query, variables = {}) {
 const money = (amt, cur = "USD") =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: cur }).format(parseFloat(amt));
 
-/* ---------- Products ---------- */
+function revealInit() {
+  const els = document.querySelectorAll(".reveal:not(.in)");
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    els.forEach(el => el.classList.add("in"));
+    return;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(el => io.observe(el));
+}
+
 const PRODUCTS_QUERY = `
 query Products($handle: String!) {
   collection(handle: $handle) {
@@ -289,7 +322,7 @@ async function loadProducts() {
       const action = (p.availableForSale && v.availableForSale)
         ? `<button class="btn-add" data-variant="${v.id}" data-title="${p.title.replace(/"/g, "&quot;")}">Add to Cart</button>`
         : `<span class="sold-out">Sold out</span>`;
-      return `<article class="card">
+      return `<article class="card reveal">
         <div class="cover">${img}</div>
         <div class="card-body">
           <h3 class="card-title">${p.title}</h3>
@@ -302,13 +335,13 @@ async function loadProducts() {
       const btn = e.target.closest(".btn-add");
       if (btn) addToCart(btn);
     });
+    revealInit();
   } catch (err) {
     status.textContent = "Couldn't load the collection right now — please refresh.";
     console.error(err);
   }
 }
 
-/* ---------- Cart ---------- */
 const CART_FRAGMENT = `
 fragment CartFields on Cart {
   id totalQuantity checkoutUrl
@@ -422,7 +455,6 @@ function renderCart() {
   checkout.disabled = false;
 }
 
-/* ---------- Drawer UI ---------- */
 const drawer = document.getElementById("drawer");
 const overlay = document.getElementById("overlay");
 function openDrawer(){ drawer.classList.add("open"); overlay.classList.add("open"); }
@@ -450,6 +482,7 @@ function toast(msg) {
 document.getElementById("year").textContent = new Date().getFullYear();
 loadProducts();
 getCart();
+revealInit();
 </script>
 </body>
 </html>
