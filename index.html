@@ -9,6 +9,7 @@
 <meta property="og:description" content="Empower minds, one publication at a time — the official MAS Publishing bookstore.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://masnational.mawlanabooks.com">
+<meta property="og:image" content="https://masnational.mawlanabooks.com/hero.jpg">
 <link rel="icon" href="https://muslimamericansociety.org/wp-content/uploads/2021/08/fav.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,6 +30,7 @@
   a{color:var(--blue);text-decoration:none}
   button{font-family:inherit;cursor:pointer;border:none;background:none}
 
+  /* Header */
   .header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
   .header-inner{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:24px}
   .logo{height:44px;flex-shrink:0}
@@ -44,23 +46,24 @@
   .cart-btn:hover{background:var(--blue-dark)}
   .cart-count{background:var(--green);color:#fff;font-size:.75rem;font-weight:700;min-width:20px;height:20px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 5px}
 
-  .hero{background:linear-gradient(150deg,var(--blue) 0%,var(--blue-dark) 60%,var(--blue-deep) 100%);color:#fff;overflow:hidden;position:relative}
-  .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,.05)}
-  .hero::before{content:"";position:absolute;left:-80px;bottom:-160px;width:340px;height:340px;border-radius:50%;background:rgba(108,191,76,.14)}
-  .hero-pattern{position:absolute;inset:0;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'><g fill='none' stroke='%23ffffff' stroke-opacity='0.07' stroke-linecap='round'><path d='M49,65 L49,49 L65,49 M85,49 L101,49 L101,65 M101,85 L101,101 L85,101 M65,101 L49,101 L49,85'/><g transform='rotate(45 75 75)'><path d='M49,65 L49,49 L65,49 M85,49 L101,49 L101,65 M101,85 L101,101 L85,101 M65,101 L49,101 L49,85'/></g></g></svg>");pointer-events:none}
-  .hero-inner{max-width:1200px;margin:0 auto;padding:56px 20px 80px;position:relative;z-index:1;text-align:center}
+  /* Hero */
+  .hero{background:linear-gradient(100deg,rgba(8,47,94,.85) 0%,rgba(10,63,126,.55) 45%,rgba(12,79,158,.30) 100%),url('hero.jpg') center/cover no-repeat;color:#fff;overflow:hidden;position:relative}
+  .hero-inner{max-width:1200px;margin:0 auto;padding:56px 20px 88px;position:relative;z-index:1;text-align:center}
+  .hero h1,.hero p{text-shadow:0 2px 26px rgba(4,16,31,.55)}
   .hero .kicker{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:6px 16px;border-radius:999px;font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:22px}
   .hero h1{font-size:clamp(1.9rem,4.5vw,3.1rem);font-weight:700;max-width:760px;margin:0 auto 18px}
   .hero p{font-size:clamp(1rem,2vw,1.15rem);color:rgba(255,255,255,.85);max-width:640px;margin:0 auto 32px}
   .btn-green{display:inline-block;background:var(--green);color:#fff;font-weight:600;font-size:1rem;padding:13px 34px;border-radius:8px;transition:background .15s}
   .btn-green:hover{background:var(--green-dark);color:#fff}
 
+  /* Flying emblem */
   .emblem-slot{height:260px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
   @media(max-width:700px){.emblem-slot{height:190px}}
   .fly-logo{position:fixed;left:50%;top:0;z-index:60;pointer-events:none;transform-origin:center center;will-change:transform}
   .fly-logo svg{display:block;width:240px;height:240px}
   @media(max-width:700px){.fly-logo svg{width:175px;height:175px}}
 
+  /* Books */
   .section{max-width:1200px;margin:0 auto;padding:64px 20px}
   .section-head{text-align:center;margin-bottom:40px}
   .section-head h2{font-size:clamp(1.5rem,3vw,2.1rem);color:var(--blue-deep)}
@@ -83,6 +86,7 @@
   .sold-out{font-size:.85rem;font-weight:600;color:#b3392f;background:#fbeeed;padding:8px 14px;border-radius:8px;white-space:nowrap}
   .grid-status{text-align:center;color:var(--muted);padding:48px 0;font-size:.95rem}
 
+  /* About */
   .about{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .about-inner{max-width:1000px;margin:0 auto;padding:64px 20px;display:grid;gap:36px;grid-template-columns:1fr}
   @media(min-width:820px){.about-inner{grid-template-columns:1fr 1fr;align-items:center}}
@@ -92,6 +96,7 @@
   .about-quote{background:var(--bg);border-left:4px solid var(--green);border-radius:0 var(--radius) var(--radius) 0;padding:26px 28px;font-size:1.12rem;font-weight:500;color:var(--blue-dark)}
   .about-quote .attrib{display:block;margin-top:12px;font-size:.85rem;font-weight:400;color:var(--muted)}
 
+  /* Footer */
   .footer{background:var(--blue-deep);color:rgba(255,255,255,.8)}
   .footer-inner{max-width:1200px;margin:0 auto;padding:48px 20px 36px;display:flex;flex-wrap:wrap;gap:32px;align-items:center;justify-content:space-between}
   .footer img{height:52px;width:auto}
@@ -101,6 +106,7 @@
   .footer-base{border-top:1px solid rgba(255,255,255,.15);text-align:center;font-size:.8rem;padding:16px 20px;color:rgba(255,255,255,.55)}
   .footer-base a{color:rgba(255,255,255,.75)}
 
+  /* Cart drawer */
   .overlay{position:fixed;inset:0;background:rgba(21,30,52,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:90}
   .overlay.open{opacity:1;pointer-events:auto}
   .drawer{position:fixed;top:0;right:0;height:100dvh;width:min(420px,100vw);background:#fff;z-index:100;transform:translateX(105%);transition:transform .25s ease;display:flex;flex-direction:column;box-shadow:-12px 0 40px rgba(21,30,52,.18)}
@@ -130,6 +136,7 @@
   .btn-checkout:hover{background:var(--green-dark)}
   .btn-checkout:disabled{background:#c4cad8}
 
+  /* Toast */
   .toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,80px);background:var(--blue-deep);color:#fff;padding:12px 22px;border-radius:999px;font-size:.9rem;font-weight:500;opacity:0;transition:all .25s;z-index:120;pointer-events:none}
   .toast.show{opacity:1;transform:translate(-50%,0)}
 </style>
@@ -174,7 +181,6 @@
 </div>
 
 <section class="hero">
-  <div class="hero-pattern"></div>
   <div class="hero-inner">
     <div class="emblem-slot" id="emblemSlot"></div>
     <span class="kicker">Nurture People · Inspire Change</span>
@@ -242,6 +248,7 @@
   </div>
 </aside>
 <div class="toast" id="toast"></div>
+
 <script>
 const CONFIG = {
   domain: "413ea3.myshopify.com",
@@ -270,6 +277,7 @@ async function gql(query, variables = {}) {
 const money = (amt, cur = "USD") =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: cur }).format(parseFloat(amt));
 
+/* ---------- Products ---------- */
 const PRODUCTS_QUERY = `
 query Products($handle: String!) {
   collection(handle: $handle) {
@@ -327,6 +335,7 @@ async function loadProducts() {
   }
 }
 
+/* ---------- Cart ---------- */
 const CART_FRAGMENT = `
 fragment CartFields on Cart {
   id totalQuantity checkoutUrl
@@ -440,6 +449,7 @@ function renderCart() {
   checkout.disabled = false;
 }
 
+/* ---------- Drawer UI ---------- */
 const drawer = document.getElementById("drawer");
 const overlay = document.getElementById("overlay");
 function openDrawer(){ drawer.classList.add("open"); overlay.classList.add("open"); }
@@ -464,6 +474,7 @@ function toast(msg) {
   toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
 }
 
+/* ---------- Hero emblem: fold + dock into header ---------- */
 (function emblemFly() {
   const fly = document.getElementById("flyLogo");
   const slot = document.getElementById("emblemSlot");
