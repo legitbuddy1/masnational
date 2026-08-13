@@ -68,6 +68,9 @@
   .j-pin{height:100vh;overflow:hidden;position:relative}
   .j-scene{position:absolute;inset:0;opacity:0}
   .j-scene img{width:100%;height:100%;object-fit:cover;will-change:transform;transform:scale(1.12);transform-origin:center}
+  .j-scene video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .3s}
+  .j-scene.has-video video{opacity:1}
+  .j-scene.has-video img{visibility:hidden}
   .j-fx{position:absolute;inset:0;pointer-events:none;z-index:2}
   .j-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,47,94,.30),rgba(8,47,94,.04) 42%,rgba(8,47,94,.40));pointer-events:none;z-index:3}
   .j-stage{z-index:4}
@@ -226,7 +229,7 @@
 <main>
   <section class="journey" id="journey" aria-label="The reading journey">
     <div class="j-pin" id="jPin">
-      <div class="j-scene" data-ch="0"><img src="ch1.jpg" alt=""></div>
+      <div class="j-scene" data-ch="0"><img src="ch1.jpg" alt=""><video src="walk1.mp4" muted playsinline preload="auto"></video></div>
       <div class="j-scene" data-ch="1"><img src="ch2.jpg" alt=""></div>
       <div class="j-scene" data-ch="2"><img src="ch3.jpg" alt=""></div>
       <div class="j-scene" data-ch="3"><img src="ch4.jpg" alt=""></div>
@@ -603,6 +606,17 @@ function buildJourney(products) {
   for (let i = 0; i < 5; i++) {
     const dir = i % 2 === 0 ? 1 : -1;
     tl.addLabel("ch" + i, i);
+    const vid = scenes[i].querySelector("video");
+    if (vid) {
+      vid.addEventListener("loadeddata", () => scenes[i].classList.add("has-video"), { once: true });
+      vid.load();
+      const proxy = { p: 0 };
+      tl.to(proxy, { p: 1, ease: "none", duration: 0.97, onUpdate: () => {
+        if (vid.readyState >= 1 && vid.duration) {
+          vid.currentTime = Math.min(vid.duration - 0.06, proxy.p * vid.duration);
+        }
+      } }, i);
+    }
     tl.fromTo(scenes[i].querySelector("img"),
       { scale: 1.17, xPercent: 2.4 * dir, yPercent: 1.4 },
       { scale: 1.03, xPercent: -1.8 * dir, yPercent: -1.2, ease: "none", duration: 1 }, i);
