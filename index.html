@@ -61,12 +61,6 @@
   .btn-hollow{display:inline-block;border:1.5px solid rgba(255,255,255,.55);color:#fff;font-weight:600;font-size:.95rem;padding:12px 26px;border-radius:10px;transition:border-color .15s,background .15s}
   .btn-hollow:hover{border-color:#fff;background:rgba(255,255,255,.1);color:#fff}
 
-  /* Flying emblem */
-  .emblem-slot{height:110px;display:flex;align-items:center;justify-content:flex-start;margin-bottom:22px}
-  @media(max-width:700px){.emblem-slot{height:88px}}
-  .fly-logo{position:fixed;left:0;top:0;z-index:60;pointer-events:none;transform-origin:center center;will-change:transform}
-  .fly-logo svg{display:block;width:96px;height:96px}
-  @media(max-width:700px){.fly-logo svg{width:80px;height:80px}}
 
   /* Books */
   .section{max-width:1200px;margin:0 auto;padding:80px 20px}
@@ -166,30 +160,9 @@
   </div>
 </header>
 
-<div class="fly-logo" id="flyLogo" aria-hidden="true">
-  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="100" cy="100" r="97" fill="#ffffff" stroke="#e3e7f0" stroke-width="1.5"/>
-    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <g stroke="#5bba47" stroke-width="8">
-        <path d="M46,76 L46,46 L76,46 M124,46 L154,46 L154,76 M154,124 L154,154 L124,154 M76,154 L46,154 L46,124"/>
-      </g>
-      <g stroke="#0c4f9e" stroke-width="8" transform="rotate(45 100 100)">
-        <path d="M46,76 L46,46 L76,46 M124,46 L154,46 L154,76 M154,124 L154,154 L124,154 M76,154 L46,154 L46,124"/>
-      </g>
-      <g stroke="#b98d33" stroke-width="4.5">
-        <path d="M100,138 L100,96 M100,106 L84,91 M100,106 L116,91 M100,119 L87,108 M100,119 L113,108 M100,96 L100,85 M100,138 L89,148 M100,138 L111,148 M100,138 L100,150"/>
-      </g>
-      <g fill="#5bba47" stroke="none">
-        <circle cx="100" cy="83" r="4.5"/><circle cx="84" cy="91" r="4"/><circle cx="116" cy="91" r="4"/><circle cx="87" cy="108" r="3.5"/><circle cx="113" cy="108" r="3.5"/>
-      </g>
-    </g>
-  </svg>
-</div>
-
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-copy">
-      <div class="emblem-slot" id="emblemSlot"></div>
       <span class="kicker">Nurture People · Inspire Change</span>
       <h1>Empower minds,<br>one publication at a time.</h1>
       <p>Original, contextual Islamic books — grounded in authentic methodology, written for the American Muslim. The official MAS Publishing bookstore.</p>
@@ -487,54 +460,6 @@ function toast(msg) {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
 }
-
-/* ---------- Hero emblem: fold + dock into header ---------- */
-(function emblemFly() {
-  const fly = document.getElementById("flyLogo");
-  const slot = document.getElementById("emblemSlot");
-  const header = document.querySelector(".header");
-  if (!fly || !slot || !header) return;
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let slotCY = 0, headerCY = 36, dockScale = 0.18, raf = null;
-  let slotCX = 0, targetX = 0;
-  function measure() {
-    const r = slot.getBoundingClientRect();
-    const svgR = fly.querySelector("svg").getBoundingClientRect();
-    slotCY = r.top + window.scrollY + r.height / 2;
-    slotCX = r.left + (svgR.width || 96) / 2;
-    targetX = window.innerWidth / 2;
-    headerCY = header.offsetHeight / 2;
-    const svgW = fly.querySelector("svg").getBoundingClientRect().width || 96;
-    dockScale = Math.min(46 / svgW, 0.6);
-    update();
-  }
-  const ease = p => p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
-  function update() {
-    const travel = slotCY - headerCY;
-    const rawY = slotCY - window.scrollY;
-    const y = Math.max(rawY, headerCY);
-    const p = travel > 0 ? Math.min(Math.max((slotCY - y) / travel, 0), 1) : 1;
-    const e = ease(p);
-    const x = slotCX + (targetX - slotCX) * e;
-    if (reduced) {
-      fly.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)` + (p >= 1 ? ` scale(${dockScale})` : "");
-      return;
-    }
-    const s = 1 - (1 - dockScale) * e;
-    const fold = Math.sin(p * Math.PI) * 55;
-    fly.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%) perspective(900px) rotateX(${fold}deg) scale(${s})`;
-    fly.style.opacity = 1 - Math.sin(p * Math.PI) * 0.18;
-  }
-  function onScroll() {
-    if (raf) return;
-    raf = requestAnimationFrame(() => { raf = null; update(); });
-  }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", measure);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
-  setTimeout(measure, 300);
-  measure();
-})();
 
 document.getElementById("year").textContent = new Date().getFullYear();
 loadProducts();
