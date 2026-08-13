@@ -499,8 +499,9 @@ function toast(msg) {
   let slotCX = 0, targetX = 0;
   function measure() {
     const r = slot.getBoundingClientRect();
+    const svgR = fly.querySelector("svg").getBoundingClientRect();
     slotCY = r.top + window.scrollY + r.height / 2;
-    slotCX = r.left + r.width / 2;
+    slotCX = r.left + (svgR.width || 96) / 2;
     targetX = window.innerWidth / 2;
     headerCY = header.offsetHeight / 2;
     const svgW = fly.querySelector("svg").getBoundingClientRect().width || 96;
