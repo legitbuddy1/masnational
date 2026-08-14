@@ -65,7 +65,7 @@
   /* Books */
   /* The Tree */
   .treewalk{position:relative;background:#f8f4e9;overflow:hidden}
-  .tw-bg{position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(800px,96vw);pointer-events:none;opacity:.95}
+  .tw-bg{position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(800px,96vw);pointer-events:none;opacity:.42}
   .tw-bg img{width:100%;display:block}
   .tw-fadeTop{position:absolute;top:0;left:0;right:0;height:110px;background:linear-gradient(180deg,var(--bg),rgba(248,244,233,0));z-index:1;pointer-events:none}
   .tw-inner{position:relative;max-width:1200px;margin:0 auto;padding:96px 20px 120px;z-index:2}
@@ -81,7 +81,7 @@
   .tw-cover{flex:0 0 auto;width:min(290px,38vw)}
   .tw-cover img{width:100%;height:auto;display:block}
   .tw-cover .noimg{aspect-ratio:3/4;background:#fff;border:1.5px dashed #d8d2bd;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600;font-size:.9rem;padding:24px;text-align:center;border-radius:8px}
-  .tw-info{flex:1;max-width:440px;background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:var(--radius);padding:26px 30px}
+  .tw-info{flex:1;max-width:440px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 30px}
   .tw-part{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green-dark);display:block;margin-bottom:8px}
   .tw-title{font-weight:800;font-size:1.3rem;color:var(--blue-deep);line-height:1.25;margin-bottom:3px}
   .tw-author{font-size:.86rem;color:var(--muted);margin-bottom:10px}
@@ -574,11 +574,9 @@ function buildTree(products) {
     gsap.registerPlugin(ScrollTrigger);
     ScrollTrigger.getAll().forEach(t => { if (t.trigger && t.trigger.closest && t.trigger.closest("#tree")) t.kill(); });
     gsap.utils.toArray("#tree .tw-st").forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return;
       gsap.fromTo(el, { autoAlpha: 0, y: 46 }, { autoAlpha: 1, y: 0, duration: .7, ease: "power2.out",
         scrollTrigger: { trigger: el, start: "top 84%" } });
-    });
-    gsap.utils.toArray("#tree .tw-zone").forEach(el => {
-      gsap.fromTo(el, { autoAlpha: 0 }, { autoAlpha: 1, duration: .6, scrollTrigger: { trigger: el, start: "top 88%" } });
     });
   }
 }
