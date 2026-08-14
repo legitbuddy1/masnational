@@ -80,21 +80,12 @@
   .tw-st.right{flex-direction:row-reverse}
   .tw-cover{flex:0 0 auto;width:min(290px,38vw)}
   .tw-cover img{width:100%;height:auto;display:block}
-  /* true-scale physical books: straight cover at rest, tilts to 3D render on hover */
+  /* true-scale physical book renders */
   #tree{--ppi:min(36px,4.2vw)}
   .tw-st.b3d-st{align-items:flex-end}
   .b3d-st .tw-cover{width:auto}
-  .b3d{width:var(--bw);margin:0 auto;position:relative}
-  .b3d .b3d-tilt{width:100%;height:auto;display:block;opacity:0;transform:perspective(1400px) rotateY(9deg);transition:opacity .32s ease,transform .5s cubic-bezier(.2,.7,.3,1)}
-  .b3d .b3d-flat{position:absolute;left:0;bottom:0;max-width:96%;max-height:100%;z-index:2;transform-origin:left center;transition:opacity .32s ease,transform .5s cubic-bezier(.2,.7,.3,1)}
-  .b3d:not(.b3d-vid-wrap):hover .b3d-flat{opacity:0;transform:perspective(1400px) rotateY(-16deg)}
-  .b3d:not(.b3d-vid-wrap):hover .b3d-tilt{opacity:1;transform:none}
-  .b3d-vid-wrap .b3d-vid{width:100%;height:auto;display:block}
-  .b3d-vid-wrap .b3d-flat{transition:opacity .25s ease;bottom:7%}
-  @media(hover:none){
-    .b3d .b3d-flat{display:none}
-    .b3d .b3d-tilt{opacity:1;transform:none}
-  }
+  .b3d{width:var(--bw);margin:0 auto}
+  .b3d img{width:100%;height:auto;display:block}
   .tw-spec{font-size:.78rem;color:var(--muted);letter-spacing:.02em;margin:-6px 0 10px}
   .tw-cover .noimg{aspect-ratio:3/4;background:#fff;border:1.5px dashed #d8d2bd;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600;font-size:.9rem;padding:24px;text-align:center;border-radius:8px}
   .tw-info{flex:1;max-width:440px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 30px}
@@ -545,7 +536,7 @@ const TREE_BOOKS = [
   { key: "tarbiya handbook", part: "The Trunk", title: "Tarbiya Handbook", author: "MAS Publishing", line: "The pattern of growth \u2014 the companion handbook to the tarbiya process itself.", dims: [5.5, 0.5, 8.5], est: true, imgw: 5.26, render: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/mas-tarbiya3d.png?v=1786681497", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/Screen_Shot_2020-01-25_at_1.17.26_PM.png" },
   { key: "mas revival", part: "The Trunk", title: "MAS Revival", author: "MAS Publishing", line: "The grain of the wood: the idea, method and spirit running through the whole of the work.", dims: [5.5, 0.46, 8.5], pages: 182, imgw: 5.22, render: "revival.png", cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/Revival-1_bcc96c73-9f2d-4227-b87b-7a7a3403fe67.png" },
   { key: "sincerity", zone: "The Heartwood", part: "The Heartwood", title: "Sincerity", author: "Yusuf al-Qaradawi", line: "The hidden center that decides whether the whole tree is sound \u2014 keeping the heart's intention pure.", dims: [5.5, 0.16, 8.5], pages: 61, imgw: 5.02, render: "sincerity.png", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/sincerity_front_cover.png" },
-  { key: "faith first", zone: "The Roots", part: "The Roots", title: "Faith First", author: "Magdy al-Hilali", line: "The taproot. Begin with iman, and everything else follows.", dims: [7.5, 0.92, 9.25], pages: 408, imgw: 7.0, render: "ff-ali.png", vid: "ffrot.webm", vidw: 8.08, cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/products/51bvjyDFT5S.jpg?width=810" },
+  { key: "faith first", zone: "The Roots", part: "The Roots", title: "Faith First", author: "Magdy al-Hilali", line: "The taproot. Begin with iman, and everything else follows.", dims: [7.5, 0.92, 9.25], pages: 408, imgw: 7.0, render: "ff-ali.png", cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/products/51bvjyDFT5S.jpg?width=810" },
   { key: "how to love", part: "The Roots", title: "How to Love the Prophet \ufdfa", author: "Ali Badahdah", line: "The root wrapped around the Sunnah \u2014 kindling love for the one we follow \ufdfa.", dims: [6, 0.2, 9], pages: 79, imgw: 4.91, render: "htlp.png", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/14A7B9D4-28BE-46E9-8EC6-4A7CC305D94A.png" },
   { key: "al-ma", part: "The Roots", title: "Al-Ma'thurat", author: "Hasan al-Banna", line: "What the roots drink daily \u2014 morning and evening remembrance drawn from Qur'an and Sunnah.", dims: [4.5, 0.3, 7], pages: 40, est: true, imgw: 3.52, render: "mathurat2.png", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/files/D14CCE8C-A13A-4EFE-83ED-FE6D498CF27F.jpg" }
 ];
@@ -567,19 +558,10 @@ function buildTree(products) {
       }
     }
     const alt = b.title.replace(/"/g, "&quot;");
-    const VID_OK = window.__vidok === undefined
-      ? (window.__vidok = document.createElement("video").canPlayType('video/webm; codecs="vp9"') !== "" && window.matchMedia("(hover: hover)").matches)
-      : window.__vidok;
     let coverHtml;
-    if (b.vid && VID_OK) {
-      coverHtml = '<div class="b3d b3d-vid-wrap" style="--bw:calc(var(--ppi)*' + b.vidw + ')">' +
-        '<video class="b3d-vid" muted playsinline preload="auto"><source src="' + b.vid + '" type="video/webm"></video>' +
-        '<img class="b3d-flat" loading="lazy" src="' + (coverUrl || b.render) + '" alt="' + alt + '">' +
-      '</div>';
-    } else if (b.render) {
+    if (b.render) {
       coverHtml = '<div class="b3d" style="--bw:calc(var(--ppi)*' + b.imgw + ')">' +
-        '<img class="b3d-tilt" loading="lazy" src="' + b.render + '" alt="' + alt + '">' +
-        '<img class="b3d-flat" loading="lazy" src="' + (coverUrl || b.render) + '" alt="">' +
+        '<img loading="lazy" src="' + b.render + '" alt="' + alt + '">' +
       '</div>';
     } else {
       coverHtml = coverUrl
@@ -609,26 +591,6 @@ function buildTree(products) {
     const btn = e.target.closest(".tw-btn[data-variant]");
     if (btn) addToCart(btn);
   };
-  // hover-scrub for animated books
-  list.querySelectorAll(".b3d-vid-wrap").forEach(w => {
-    const v = w.querySelector(".b3d-vid");
-    const flat = w.querySelector(".b3d-flat");
-    let target = 0, raf = null;
-    const step = () => {
-      const d = v.duration || 0;
-      if (d) {
-        const goal = target * (d - 0.05);
-        const next = v.currentTime + (goal - v.currentTime) * 0.14;
-        v.currentTime = Math.max(0, Math.min(d - 0.05, next));
-        flat.style.opacity = v.currentTime > 0.08 ? 0 : 1;
-        if (Math.abs(goal - v.currentTime) > 0.02) { raf = requestAnimationFrame(step); return; }
-      }
-      raf = null;
-    };
-    const go = t => { target = t; if (!raf) raf = requestAnimationFrame(step); };
-    w.addEventListener("mouseenter", () => go(1));
-    w.addEventListener("mouseleave", () => go(0));
-  });
   if (window.gsap && window.ScrollTrigger && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     gsap.registerPlugin(ScrollTrigger);
     ScrollTrigger.getAll().forEach(t => {
