@@ -80,12 +80,19 @@
   .tw-st.right{flex-direction:row-reverse}
   .tw-cover{flex:0 0 auto;width:min(290px,38vw)}
   .tw-cover img{width:100%;height:auto;display:block}
-  /* true-scale flat paperback (pilot) */
+  /* true-scale physical books: straight cover at rest, tilts to 3D render on hover */
   #tree{--ppi:min(36px,4.2vw)}
   .tw-st.b3d-st{align-items:flex-end}
   .b3d-st .tw-cover{width:auto}
-  .b3d{width:var(--bw);margin:0 auto}
-  .b3d img{width:100%;height:auto;display:block}
+  .b3d{width:var(--bw);margin:0 auto;position:relative}
+  .b3d .b3d-tilt{width:100%;height:auto;display:block;opacity:0;transform:perspective(1400px) rotateY(9deg);transition:opacity .32s ease,transform .5s cubic-bezier(.2,.7,.3,1)}
+  .b3d .b3d-flat{position:absolute;left:0;bottom:0;max-width:96%;max-height:100%;z-index:2;transform-origin:left center;transition:opacity .32s ease,transform .5s cubic-bezier(.2,.7,.3,1)}
+  .b3d:hover .b3d-flat{opacity:0;transform:perspective(1400px) rotateY(-16deg)}
+  .b3d:hover .b3d-tilt{opacity:1;transform:none}
+  @media(hover:none){
+    .b3d .b3d-flat{display:none}
+    .b3d .b3d-tilt{opacity:1;transform:none}
+  }
   .tw-spec{font-size:.78rem;color:var(--muted);letter-spacing:.02em;margin:-6px 0 10px}
   .tw-cover .noimg{aspect-ratio:3/4;background:#fff;border:1.5px dashed #d8d2bd;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600;font-size:.9rem;padding:24px;text-align:center;border-radius:8px}
   .tw-info{flex:1;max-width:440px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 30px}
@@ -525,20 +532,20 @@ function toast(msg) {
 /* ---------- The Tree ---------- */
 const TREE_BOOKS = [
   { key: "guardians", zone: "The Canopy", part: "The Shade", title: "Guardians of the Houses of Allah", author: "MAS Publishing", line: "The canopy the community gathers under \u2014 for everyone who loves, serves and sustains the houses of Allah.", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/frontcover.png" },
-  { key: "tajdid", part: "The Leaves", title: "Tajdid Anthology, Vol. I", author: "Team of Authors", line: "Leaves fall and return \u2014 renewal, season after season. Essays on Islamic work and revival from many pens.", cover: "https://muslimamericansociety.org/wp-content/uploads/2025/10/Tajdid-Anthology.jpg" },
-  { key: "the muslim speaker", part: "The Fruit", title: "The Muslim Speaker Toolkit", author: "Asad Zaman", line: "What the tree hands to others: Qur'an and Sunnah references on fifty topics, gathered for khateebs and teachers.", cover: "https://muslimamericansociety.org/wp-content/uploads/2025/10/The-Muslim-Speaker-Toolkit-Compiled-References-from-Quran-Sunnah.jpg" },
-  { key: "our youth", part: "The Seeds", title: "Our Youth, Our Future", author: "Ahmad H. Sakr", line: "Seeds for the next tree \u2014 a ten-step guide to raising the generation that carries the baton.", cover: "https://m.media-amazon.com/images/I/615j8eEbQ+L._SY522_.jpg" },
-  { key: "transformed", zone: "The Branches", part: "The Branches", title: "Transformed by Worship", author: "Salah Soltan", line: "The four great limbs \u2014 how worship was designed to shape soul, character, mind and body.", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/E94AB6B1-286F-461C-9B5F-D26C077F645A.jpg" },
-  { key: "cultivating", part: "The Branches", title: "Cultivating Character", author: "Younoos Latheef", line: "The shape the branching takes: twelve character traits through an Islamic lens, for youth and their mentors.", cover: "https://muslimamericansociety.org/wp-content/uploads/2023/08/cultivating-character-front-cover.png" },
-  { key: "roadblocks:", zone: "The Bark", part: "The Bark", title: "Roadblocks", author: "As-Sayyid Muhammad Nuh", line: "The tree's protection \u2014 the spiritual diseases that rot Islamic work from within, named and treated.", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/files/RoadLocks.jpg" },
-  { key: "roadblocks volume 2", part: "The Bark", title: "Roadblocks, Volume II", author: "As-Sayyid Muhammad Nuh", line: "The second layer of defense: six more roadblocks, with commentary for the age of feeds and followers.", cover: "https://muslimamericansociety.org/wp-content/uploads/2026/02/Road-Blocks-Volume-2.jpg" },
-  { key: "rising soul", zone: "The Trunk", part: "The Trunk", title: "Rising Soul", author: "Muhammad Mansur", line: "The self, rising ring by ring \u2014 a practical, step-by-step guide to tarbiyat an-nafs.", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/rising_soul_front_cover.png" },
-  { key: "tarbiya handbook", part: "The Trunk", title: "Tarbiya Handbook", author: "MAS Publishing", line: "The pattern of growth \u2014 the companion handbook to the tarbiya process itself.", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/Screen_Shot_2020-01-25_at_1.17.26_PM.png" },
-  { key: "mas revival", part: "The Trunk", title: "MAS Revival", author: "MAS Publishing", line: "The grain of the wood: the idea, method and spirit running through the whole of the work.", cover: "https://muslimamericansociety.org/wp-content/uploads/2024/08/Revival-1.png" },
-  { key: "sincerity", zone: "The Heartwood", part: "The Heartwood", title: "Sincerity", author: "Yusuf al-Qaradawi", line: "The hidden center that decides whether the whole tree is sound \u2014 keeping the heart's intention pure.", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/sincerity_front_cover.png" },
-  { key: "faith first", zone: "The Roots", part: "The Roots", title: "Faith First", author: "Magdy al-Hilali", line: "The taproot. Begin with iman, and everything else follows.", dims: [7.5, 0.92, 9.25], pages: 408, imgw: 7.0, cover: "ff-ali.png" },
-  { key: "how to love", part: "The Roots", title: "How to Love the Prophet \ufdfa", author: "Ali Badahdah", line: "The root wrapped around the Sunnah \u2014 kindling love for the one we follow \ufdfa.", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/14A7B9D4-28BE-46E9-8EC6-4A7CC305D94A.png" },
-  { key: "al-ma", part: "The Roots", title: "Al-Ma'thurat", author: "Hasan al-Banna", line: "What the roots drink daily \u2014 morning and evening remembrance drawn from Qur'an and Sunnah.", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/files/D14CCE8C-A13A-4EFE-83ED-FE6D498CF27F.jpg" }
+  { key: "tajdid", part: "The Leaves", title: "Tajdid Anthology, Vol. I", author: "Team of Authors", line: "Leaves fall and return \u2014 renewal, season after season. Essays on Islamic work and revival from many pens.", dims: [6, 0.64, 9], pages: 256, imgw: 5.83, render: "tajdid.png", cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/Tajdid-Anthology_cc5fa651-48d8-4d20-8930-95fec0549f51.jpg" },
+  { key: "the muslim speaker", part: "The Fruit", title: "The Muslim Speaker Toolkit", author: "Asad Zaman", line: "What the tree hands to others: Qur'an and Sunnah references on fifty topics, gathered for khateebs and teachers.", dims: [6, 0.5, 9], pages: 198, imgw: 5.30, render: "mst.png", cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/The-Muslim-Speaker-Toolkit-Compiled-References-from-Quran-Sunnah_b2e22daf-b1a5-48d3-88f5-b5e77e04a563.jpg" },
+  { key: "our youth", part: "The Seeds", title: "Our Youth, Our Future", author: "Ahmad H. Sakr", line: "Seeds for the next tree \u2014 a ten-step guide to raising the generation that carries the baton.", dims: [5.74, 0.41, 8.74], pages: 90, imgw: 5.17, render: "ouryouth.png", cover: "https://m.media-amazon.com/images/I/615j8eEbQ+L._SY522_.jpg" },
+  { key: "transformed", zone: "The Branches", part: "The Branches", title: "Transformed by Worship", author: "Salah Soltan", line: "The four great limbs \u2014 how worship was designed to shape soul, character, mind and body.", dims: [5.5, 0.5, 8.5], pages: 197, imgw: 5.46, render: "tbw.png", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/E94AB6B1-286F-461C-9B5F-D26C077F645A.jpg" },
+  { key: "cultivating", part: "The Branches", title: "Cultivating Character", author: "Younoos Latheef", line: "The shape the branching takes: twelve character traits through an Islamic lens, for youth and their mentors.", dims: [6, 0.59, 9], pages: 261, imgw: 5.53, render: "cultivating.png", cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/cultivating-character-front-cover_05b8174a-7f7c-417c-b816-288758db43aa.png" },
+  { key: "roadblocks:", zone: "The Bark", part: "The Bark", title: "Roadblocks", author: "As-Sayyid Muhammad Nuh", line: "The tree's protection \u2014 the spiritual diseases that rot Islamic work from within, named and treated.", dims: [6, 0.48, 9], pages: 192, imgw: 5.51, render: "rb1.png", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/files/RoadLocks.jpg" },
+  { key: "roadblocks volume 2", part: "The Bark", title: "Roadblocks, Volume II", author: "As-Sayyid Muhammad Nuh", line: "The second layer of defense: six more roadblocks, with commentary for the age of feeds and followers.", dims: [6, 0.43, 9], pages: 169, imgw: 5.02, render: "rb2.png", cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/Road-Blocks-Volume-2_15d53c98-8680-4a4b-9071-00e2acd79e7c.jpg" },
+  { key: "rising soul", zone: "The Trunk", part: "The Trunk", title: "Rising Soul", author: "Muhammad Mansur", line: "The self, rising ring by ring \u2014 a practical, step-by-step guide to tarbiyat an-nafs.", dims: [5.5, 0.6, 8.5], pages: 240, imgw: 6.24, render: "risingsoul.png", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/rising_soul_front_cover.png" },
+  { key: "tarbiya handbook", part: "The Trunk", title: "Tarbiya Handbook", author: "MAS Publishing", line: "The pattern of growth \u2014 the companion handbook to the tarbiya process itself.", dims: [5.5, 0.5, 8.5], est: true, imgw: 5.26, render: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/mas-tarbiya3d.png?v=1786681497", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/Screen_Shot_2020-01-25_at_1.17.26_PM.png" },
+  { key: "mas revival", part: "The Trunk", title: "MAS Revival", author: "MAS Publishing", line: "The grain of the wood: the idea, method and spirit running through the whole of the work.", dims: [5.5, 0.46, 8.5], pages: 182, imgw: 5.22, render: "revival.png", cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/Revival-1_bcc96c73-9f2d-4227-b87b-7a7a3403fe67.png" },
+  { key: "sincerity", zone: "The Heartwood", part: "The Heartwood", title: "Sincerity", author: "Yusuf al-Qaradawi", line: "The hidden center that decides whether the whole tree is sound \u2014 keeping the heart's intention pure.", dims: [5.5, 0.16, 8.5], pages: 61, imgw: 5.02, render: "sincerity.png", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/sincerity_front_cover.png" },
+  { key: "faith first", zone: "The Roots", part: "The Roots", title: "Faith First", author: "Magdy al-Hilali", line: "The taproot. Begin with iman, and everything else follows.", dims: [7.5, 0.92, 9.25], pages: 408, imgw: 7.0, render: "ff-ali.png", cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/products/51bvjyDFT5S.jpg?width=810" },
+  { key: "how to love", part: "The Roots", title: "How to Love the Prophet \ufdfa", author: "Ali Badahdah", line: "The root wrapped around the Sunnah \u2014 kindling love for the one we follow \ufdfa.", dims: [6, 0.2, 9], pages: 79, imgw: 4.91, render: "htlp.png", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/14A7B9D4-28BE-46E9-8EC6-4A7CC305D94A.png" },
+  { key: "al-ma", part: "The Roots", title: "Al-Ma'thurat", author: "Hasan al-Banna", line: "What the roots drink daily \u2014 morning and evening remembrance drawn from Qur'an and Sunnah.", dims: [4.5, 0.3, 7], pages: 40, est: true, imgw: 4.14, render: "mathurat.png", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/files/D14CCE8C-A13A-4EFE-83ED-FE6D498CF27F.jpg" }
 ];
 
 function buildTree(products) {
@@ -559,22 +566,23 @@ function buildTree(products) {
     }
     const alt = b.title.replace(/"/g, "&quot;");
     let coverHtml;
-    if (b.dims && coverUrl) {
-      coverHtml = '<div class="b3d" style="--bw:calc(var(--ppi)*' + (b.imgw || b.dims[0]) + ')">' +
-        '<img loading="lazy" src="' + coverUrl + '" alt="' + alt + '">' +
+    if (b.render) {
+      coverHtml = '<div class="b3d" style="--bw:calc(var(--ppi)*' + b.imgw + ')">' +
+        '<img class="b3d-tilt" loading="lazy" src="' + b.render + '" alt="' + alt + '">' +
+        '<img class="b3d-flat" loading="lazy" src="' + (coverUrl || b.render) + '" alt="">' +
       '</div>';
     } else {
       coverHtml = coverUrl
         ? '<img loading="lazy" src="' + coverUrl + '" alt="' + alt + '">'
         : '<div class="noimg">' + b.title + '<br>cover coming</div>';
     }
-    const spec = (b.pages && b.dims)
+    const spec = (b.pages && b.dims && !b.est)
       ? '<div class="tw-spec">' + b.pages + ' pages · ' + b.dims[0] + ' × ' + b.dims[2] + '&Prime; paperback</div>'
       : '';
     const zone = b.zone ? '<div class="tw-zone"><span>' + b.zone + '</span></div>' : '';
     const side = i % 2 === 1 ? ' right' : '';
     return zone +
-      '<div class="tw-st' + side + (b.dims && coverUrl ? ' b3d-st' : '') + '">' +
+      '<div class="tw-st' + side + (b.render ? ' b3d-st' : '') + '">' +
         '<div class="tw-cover">' + coverHtml + '</div>' +
         '<div class="tw-info">' +
           '<span class="tw-part">' + b.part + '</span>' +
