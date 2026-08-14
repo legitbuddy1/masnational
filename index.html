@@ -84,8 +84,9 @@
   #tree{--ppi:min(36px,4.2vw)}
   .tw-st.b3d-st{align-items:flex-end}
   .b3d-st .tw-cover{width:auto}
-  .b3d{width:var(--bw);margin:0 auto}
-  .b3d img{width:100%;height:auto;display:block}
+  .b3d{width:var(--bw);margin:0 auto;position:relative}
+  .b3d img{width:100%;height:auto;display:block;position:relative;z-index:1}
+  .b3d::after{content:"";position:absolute;left:-2%;right:-6%;bottom:-2.2%;height:6.5%;background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(28,35,51,.32),rgba(28,35,51,0) 72%);z-index:0}
   .tw-spec{font-size:.78rem;color:var(--muted);letter-spacing:.02em;margin:-6px 0 10px}
   .tw-cover .noimg{aspect-ratio:3/4;background:#fff;border:1.5px dashed #d8d2bd;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600;font-size:.9rem;padding:24px;text-align:center;border-radius:8px}
   .tw-info{flex:1;max-width:440px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 30px}
