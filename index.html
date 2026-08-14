@@ -63,56 +63,40 @@
 
 
   /* Books */
-  /* Journey */
-  .journey{position:relative;background:var(--blue-deep)}
-  .j-pin{height:100vh;overflow:hidden;position:relative}
-  .j-scene{position:absolute;inset:0;opacity:0}
-  .j-scene img{width:100%;height:100%;object-fit:cover;will-change:transform;transform:scale(1.12);transform-origin:center}
-  .j-scene video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .3s}
-  .j-scene.has-video video{opacity:1}
-  .j-scene.has-video img{visibility:hidden}
-  .j-fx{position:absolute;inset:0;pointer-events:none;z-index:2}
-  .j-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,47,94,.30),rgba(8,47,94,.04) 42%,rgba(8,47,94,.40));pointer-events:none;z-index:3}
-  .j-stage{z-index:4}
-  .j-progress{z-index:5}
-  .j-stage{position:absolute;inset:0;opacity:0;visibility:hidden;pointer-events:none}
-  .j-cover{position:absolute;height:min(34vh,300px);pointer-events:auto}
-  .j-cover img{height:100%;width:auto}
-  .j-card{position:absolute;max-width:370px;background:rgba(255,255,255,.96);border-radius:14px;padding:24px 28px;pointer-events:auto}
-  .j-num{font-size:.74rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green-dark);margin-bottom:9px;display:block}
-  .j-title{font-weight:800;font-size:1.3rem;line-height:1.25;color:var(--blue-deep);margin-bottom:2px}
-  .j-author{font-size:.85rem;color:var(--muted);margin-bottom:10px}
-  .j-line{font-size:.95rem;color:var(--ink);line-height:1.55;margin-bottom:16px}
-  .j-foot{display:flex;align-items:center;gap:18px}
-  .j-price{font-weight:800;color:var(--blue-deep);font-size:1.05rem}
-  .j-btn{background:var(--green);color:#fff;font-weight:700;font-size:.86rem;padding:10px 20px;border-radius:9px;transition:background .15s}
-  .j-btn:hover{background:var(--green-dark)}
-  .j-btn:disabled{background:#c4cad8;cursor:not-allowed}
-  .j-progress{position:absolute;right:26px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:5}
-  .j-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.45);transition:transform .2s,background .2s}
-  .j-dot.on{background:#fff;transform:scale(1.4)}
-  .j-stage[data-ch="0"] .j-cover{left:11%;bottom:17%;transform:rotate(-3deg)}
-  .j-stage[data-ch="0"] .j-card{right:7%;top:17%}
-  .j-stage[data-ch="1"] .j-cover{right:17%;bottom:23%;transform:rotate(2.5deg)}
-  .j-stage[data-ch="1"] .j-card{left:7%;top:19%}
-  .j-stage[data-ch="2"] .j-cover{left:13%;bottom:13%;transform:rotate(-2deg)}
-  .j-stage[data-ch="2"] .j-card{right:7%;top:15%}
-  .j-stage[data-ch="3"] .j-cover{right:15%;bottom:15%;transform:rotate(3deg)}
-  .j-stage[data-ch="3"] .j-card{left:7%;top:18%}
-  .j-stage[data-ch="4"] .j-cover{left:43%;bottom:11%;transform:rotate(-2deg)}
-  .j-stage[data-ch="4"] .j-card{right:6%;top:13%}
-  @media(max-width:780px){
-    .j-cover{height:23vh;left:50%!important;right:auto!important;bottom:auto!important;top:13%!important;transform:translateX(-50%) rotate(-2deg)!important}
-    .j-card{left:14px!important;right:14px!important;top:auto!important;bottom:22px!important;max-width:none;padding:18px 20px}
-    .j-progress{right:10px}
+  /* The Tree */
+  .treewalk{position:relative;background:#f8f4e9;overflow:hidden}
+  .tw-bg{position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(800px,96vw);pointer-events:none;opacity:.95}
+  .tw-bg img{width:100%;display:block}
+  .tw-fadeTop{position:absolute;top:0;left:0;right:0;height:110px;background:linear-gradient(180deg,var(--bg),rgba(248,244,233,0));z-index:1;pointer-events:none}
+  .tw-inner{position:relative;max-width:1200px;margin:0 auto;padding:96px 20px 120px;z-index:2}
+  .tw-head{text-align:center;margin-bottom:6vh}
+  .tw-kick{display:inline-flex;align-items:center;gap:14px;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-dark)}
+  .tw-kick::before,.tw-kick::after{content:"";width:30px;height:2px;background:var(--green)}
+  .tw-head h2{font-size:clamp(1.8rem,3.6vw,2.6rem);font-weight:800;letter-spacing:-.015em;color:var(--blue-deep);margin:14px 0 12px}
+  .tw-head p{color:var(--muted);max-width:560px;margin:0 auto}
+  .tw-zone{position:relative;margin:10vh 0 2vh;text-align:center}
+  .tw-zone span{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 24px;font-weight:700;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-deep)}
+  .tw-st{display:flex;align-items:center;gap:clamp(28px,6vw,80px);max-width:1020px;margin:8vh auto}
+  .tw-st.right{flex-direction:row-reverse}
+  .tw-cover{flex:0 0 auto;width:min(290px,38vw)}
+  .tw-cover img{width:100%;height:auto;display:block}
+  .tw-cover .noimg{aspect-ratio:3/4;background:#fff;border:1.5px dashed #d8d2bd;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600;font-size:.9rem;padding:24px;text-align:center;border-radius:8px}
+  .tw-info{flex:1;max-width:440px;background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:var(--radius);padding:26px 30px}
+  .tw-part{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green-dark);display:block;margin-bottom:8px}
+  .tw-title{font-weight:800;font-size:1.3rem;color:var(--blue-deep);line-height:1.25;margin-bottom:3px}
+  .tw-author{font-size:.86rem;color:var(--muted);margin-bottom:10px}
+  .tw-line{font-size:.95rem;color:var(--ink);line-height:1.55;margin-bottom:16px}
+  .tw-foot{display:flex;align-items:center;gap:16px}
+  .tw-price{font-weight:800;color:var(--blue-deep);font-size:1.02rem}
+  .tw-btn{background:var(--green);color:#fff;font-weight:700;font-size:.86rem;padding:10px 20px;border-radius:9px;transition:background .15s}
+  .tw-btn:hover{background:var(--green-dark)}
+  .tw-soon{font-size:.8rem;font-weight:700;letter-spacing:.04em;color:#8a8264;background:#f1ecd9;padding:8px 16px;border-radius:999px}
+  @media(max-width:760px){
+    .tw-st,.tw-st.right{flex-direction:column;text-align:center;margin:7vh auto}
+    .tw-cover{width:min(240px,62vw)}
+    .tw-info{max-width:none}
+    .tw-foot{justify-content:center}
   }
-  .journey.static .j-pin{height:auto;overflow:visible}
-  .journey.static .j-scene{position:relative;opacity:1;height:62vh}
-  .journey.static .j-scene img{transform:none}
-  .journey.static .j-stage{position:relative;opacity:1;visibility:visible;pointer-events:auto;padding:26px 20px 52px;inset:auto}
-  .journey.static .j-cover{position:static;height:210px;transform:none!important;display:flex;justify-content:center;margin:0 auto 18px}
-  .journey.static .j-card{position:static;margin:0 auto}
-  .journey.static .j-progress{display:none}
 
   .section{max-width:1200px;margin:0 auto;padding:80px 20px}
   .section-head{display:flex;align-items:baseline;gap:20px;margin-bottom:56px}
@@ -201,7 +185,7 @@
     </a>
     <div class="header-tag">Publishing Bookstore<br>fulfilled by Mawlana Books</div>
     <nav class="nav">
-      <a href="#journey">Journey</a>
+      <a href="#tree">The Tree</a>
       <a href="#books">Books</a>
       <a href="#about">About</a>
       <a class="ext" href="https://muslimamericansociety.org" target="_blank" rel="noopener">muslimamericansociety.org</a>
@@ -227,36 +211,16 @@
 </section>
 
 <main>
-  <section class="journey" id="journey" aria-label="The reading journey">
-    <div class="j-pin" id="jPin">
-      <div class="j-scene" data-ch="0"><img src="ch1.jpg" alt=""><video src="walk1.mp4" muted playsinline preload="auto"></video></div>
-      <div class="j-scene" data-ch="1"><img src="ch2.jpg" alt=""></div>
-      <div class="j-scene" data-ch="2"><img src="ch3.jpg" alt=""></div>
-      <div class="j-scene" data-ch="3"><img src="ch4.jpg" alt=""></div>
-      <div class="j-scene" data-ch="4"><img src="ch5.jpg" alt=""></div>
-      <canvas class="j-fx" id="jFx" aria-hidden="true"></canvas>
-      <div class="j-shade"></div>
-      <div class="j-stage" data-ch="0">
-        <div class="j-cover"><img alt=""></div>
-        <div class="j-card"><span class="j-num">Chapter I · The Gate</span><h3 class="j-title"></h3><div class="j-author"></div><p class="j-line">Every journey begins at the self — a practical, step-by-step guide to tarbiya, the lifelong work of purifying the soul.</p><div class="j-foot"><span class="j-price"></span><button class="j-btn" disabled>Add to Cart</button></div></div>
+  <section class="treewalk" id="tree" aria-label="The Tree — the MAS Publishing catalog">
+    <div class="tw-bg" aria-hidden="true"><img src="tree1.png" alt=""><img src="tree2.png" alt=""><img src="tree3.png" alt=""></div>
+    <div class="tw-fadeTop" aria-hidden="true"></div>
+    <div class="tw-inner">
+      <div class="tw-head">
+        <span class="tw-kick">Nurture People &middot; Inspire Change</span>
+        <h2>One tree. Fifteen books.</h2>
+        <p>The MAS mark is a tree rooted in Qur'an and Sunnah. Descend from the canopy to the roots &mdash; every book lives at the part of the tree it serves.</p>
       </div>
-      <div class="j-stage" data-ch="1">
-        <div class="j-cover"><img alt=""></div>
-        <div class="j-card"><span class="j-num">Chapter II · The Path</span><h3 class="j-title"></h3><div class="j-author"></div><p class="j-line">Walk with intention. Al-Qaradawi's classic on ikhlas — keeping the heart's aim pure through every step of the work.</p><div class="j-foot"><span class="j-price"></span><button class="j-btn" disabled>Add to Cart</button></div></div>
-      </div>
-      <div class="j-stage" data-ch="2">
-        <div class="j-cover"><img alt=""></div>
-        <div class="j-card"><span class="j-num">Chapter III · The Water</span><h3 class="j-title"></h3><div class="j-author"></div><p class="j-line">Let the light in first. Begin with iman and the rest follows — eleven ways to wake the heart from slumber.</p><div class="j-foot"><span class="j-price"></span><button class="j-btn" disabled>Add to Cart</button></div></div>
-      </div>
-      <div class="j-stage" data-ch="3">
-        <div class="j-cover"><img alt=""></div>
-        <div class="j-card"><span class="j-num">Chapter IV · The Canopy</span><h3 class="j-title"></h3><div class="j-author"></div><p class="j-line">Shelter in worship. How prayer, fasting, zakah and Hajj were designed to transform the soul, character, mind and body.</p><div class="j-foot"><span class="j-price"></span><button class="j-btn" disabled>Add to Cart</button></div></div>
-      </div>
-      <div class="j-stage" data-ch="4">
-        <div class="j-cover"><img alt=""></div>
-        <div class="j-card"><span class="j-num">Chapter V · The Roots</span><h3 class="j-title"></h3><div class="j-author"></div><p class="j-line">Tend what holds us all. For everyone who loves, serves and sustains the houses of Allah.</p><div class="j-foot"><span class="j-price"></span><button class="j-btn" disabled>Add to Cart</button></div></div>
-      </div>
-      <div class="j-progress"><span class="j-dot on"></span><span class="j-dot"></span><span class="j-dot"></span><span class="j-dot"></span><span class="j-dot"></span></div>
+      <div id="twList"></div>
     </div>
   </section>
 
@@ -403,7 +367,7 @@ async function loadProducts() {
       const btn = e.target.closest(".btn-add");
       if (btn) addToCart(btn);
     });
-    buildJourney(products);
+    buildTree(products);
   } catch (err) {
     status.textContent = "Couldn't load the collection right now — please refresh.";
     console.error(err);
@@ -549,131 +513,76 @@ function toast(msg) {
   toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
 }
 
-/* ---------- Journey ---------- */
-const JOURNEY_KEYS = ["rising soul", "sincerity", "faith first", "transformed", "guardians"];
+/* ---------- The Tree ---------- */
+const TREE_BOOKS = [
+  { key: "guardians", zone: "The Canopy", part: "The Shade", title: "Guardians of the Houses of Allah", author: "MAS Publishing", line: "The canopy the community gathers under \u2014 for everyone who loves, serves and sustains the houses of Allah.", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/frontcover.png" },
+  { key: "tajdid", part: "The Leaves", title: "Tajdid Anthology, Vol. I", author: "Team of Authors", line: "Leaves fall and return \u2014 renewal, season after season. Essays on Islamic work and revival from many pens.", cover: "https://muslimamericansociety.org/wp-content/uploads/2025/10/Tajdid-Anthology.jpg" },
+  { key: "the muslim speaker", part: "The Fruit", title: "The Muslim Speaker Toolkit", author: "Asad Zaman", line: "What the tree hands to others: Qur'an and Sunnah references on fifty topics, gathered for khateebs and teachers.", cover: "https://muslimamericansociety.org/wp-content/uploads/2025/10/The-Muslim-Speaker-Toolkit-Compiled-References-from-Quran-Sunnah.jpg" },
+  { key: "our youth", part: "The Seeds", title: "Our Youth, Our Future", author: "Ahmad H. Sakr", line: "Seeds for the next tree \u2014 a ten-step guide to raising the generation that carries the baton.", cover: null },
+  { key: "transformed", zone: "The Branches", part: "The Branches", title: "Transformed by Worship", author: "Salah Soltan", line: "The four great limbs \u2014 how worship was designed to shape soul, character, mind and body.", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/E94AB6B1-286F-461C-9B5F-D26C077F645A.jpg" },
+  { key: "cultivating", part: "The Branches", title: "Cultivating Character", author: "Younoos Latheef", line: "The shape the branching takes: twelve character traits through an Islamic lens, for youth and their mentors.", cover: "https://muslimamericansociety.org/wp-content/uploads/2023/08/cultivating-character-front-cover.png" },
+  { key: "roadblocks:", zone: "The Bark", part: "The Bark", title: "Roadblocks", author: "As-Sayyid Muhammad Nuh", line: "The tree's protection \u2014 the spiritual diseases that rot Islamic work from within, named and treated.", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/files/RoadLocks.jpg" },
+  { key: "roadblocks volume 2", part: "The Bark", title: "Roadblocks, Volume II", author: "As-Sayyid Muhammad Nuh", line: "The second layer of defense: six more roadblocks, with commentary for the age of feeds and followers.", cover: "https://muslimamericansociety.org/wp-content/uploads/2026/02/Road-Blocks-Volume-2.jpg" },
+  { key: "rising soul", zone: "The Trunk", part: "The Trunk", title: "Rising Soul", author: "Muhammad Mansur", line: "The self, rising ring by ring \u2014 a practical, step-by-step guide to tarbiyat an-nafs.", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/rising_soul_front_cover.png" },
+  { key: "tarbiya handbook", part: "The Trunk", title: "Tarbiya Handbook", author: "MAS Publishing", line: "The pattern of growth \u2014 the companion handbook to the tarbiya process itself.", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/Screen_Shot_2020-01-25_at_1.17.26_PM.png" },
+  { key: "mas revival", part: "The Trunk", title: "MAS Revival", author: "MAS Publishing", line: "The grain of the wood: the idea, method and spirit running through the whole of the work.", cover: "https://muslimamericansociety.org/wp-content/uploads/2024/08/Revival-1.png" },
+  { key: "sincerity", zone: "The Heartwood", part: "The Heartwood", title: "Sincerity", author: "Yusuf al-Qaradawi", line: "The hidden center that decides whether the whole tree is sound \u2014 keeping the heart's intention pure.", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/sincerity_front_cover.png" },
+  { key: "faith first", zone: "The Roots", part: "The Roots", title: "Faith First", author: "Magdy al-Hilali", line: "The taproot. Begin with iman, and everything else follows.", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/FAITHfirstfrontcoveronly.jpg" },
+  { key: "how to love", part: "The Roots", title: "How to Love the Prophet \ufdfa", author: "Ali Badahdah", line: "The root wrapped around the Sunnah \u2014 kindling love for the one we follow \ufdfa.", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/14A7B9D4-28BE-46E9-8EC6-4A7CC305D94A.png" },
+  { key: "al-ma", part: "The Roots", title: "Al-Ma'thurat", author: "Hasan al-Banna", line: "What the roots drink daily \u2014 morning and evening remembrance drawn from Qur'an and Sunnah.", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/files/D14CCE8C-A13A-4EFE-83ED-FE6D498CF27F.jpg" }
+];
 
-function buildJourney(products) {
-  JOURNEY_KEYS.forEach((key, i) => {
-    const stage = document.querySelector(`.j-stage[data-ch="${i}"]`);
-    if (!stage) return;
-    const p = products.find(x => x.title.toLowerCase().startsWith(key)) ||
-              products.find(x => x.title.toLowerCase().includes(key));
-    const cov = stage.querySelector(".j-cover img");
-    const card = stage.querySelector(".j-card");
-    if (!p) { stage.querySelector(".j-cover").style.display = "none"; card.querySelector(".j-foot").style.display = "none"; return; }
-    const v = p.variants.nodes[0] || {};
-    if (p.featuredImage) cov.src = p.featuredImage.url.split("?")[0] + "?width=420";
-    cov.alt = p.title;
-    card.querySelector(".j-title").textContent = p.title.split(":")[0];
-    let a = []; try { a = JSON.parse(p.authors?.value || "[]"); } catch (e) {}
-    card.querySelector(".j-author").textContent = a.length ? "by " + a.join(", ") : "";
-    if (v.price) card.querySelector(".j-price").textContent = money(v.price.amount, v.price.currencyCode);
-    const btn = card.querySelector(".j-btn");
-    if (p.availableForSale && v.availableForSale) {
-      btn.disabled = false; btn.dataset.variant = v.id; btn.dataset.title = p.title;
-      btn.addEventListener("click", () => addToCart(btn));
-    } else {
-      btn.textContent = "Sold out";
-    }
-  });
-  if (window.ScrollTrigger) ScrollTrigger.refresh();
-}
-
-(function journeyInit() {
-  const pin = document.getElementById("jPin");
-  if (!pin) return;
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduced || !window.gsap || !window.ScrollTrigger) {
-    document.getElementById("journey").classList.add("static");
-    return;
-  }
-  gsap.registerPlugin(ScrollTrigger);
-  const scenes = gsap.utils.toArray(".j-scene");
-  const stages = gsap.utils.toArray(".j-stage");
-  const dots = gsap.utils.toArray(".j-dot");
-  gsap.set(scenes[0], { autoAlpha: 1 });
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#journey", start: "top top", end: "+=480%",
-      scrub: 0.65, pin: "#jPin", anticipatePin: 1,
-      snap: { snapTo: "labelsDirectional", duration: { min: 0.25, max: 0.6 }, delay: 0.08, ease: "power1.inOut" },
-      onUpdate: self => {
-        const idx = Math.min(4, Math.floor(self.progress * 5));
-        dots.forEach((d, k) => d.classList.toggle("on", k === idx));
+function buildTree(products) {
+  const list = document.getElementById("twList");
+  if (!list) return;
+  const html = TREE_BOOKS.map((b, i) => {
+    const p = products.find(x => x.title.toLowerCase().startsWith(b.key)) ||
+              products.find(x => x.title.toLowerCase().includes(b.key));
+    let coverUrl = b.cover;
+    let foot = '<span class="tw-soon">Coming soon</span>';
+    if (p) {
+      const v = p.variants.nodes[0] || {};
+      if (p.featuredImage) coverUrl = p.featuredImage.url.split("?")[0] + "?width=560";
+      if (p.availableForSale && v.availableForSale && v.price) {
+        foot = '<span class="tw-price">' + money(v.price.amount, v.price.currencyCode) + '</span>' +
+               '<button class="tw-btn" data-variant="' + v.id + '" data-title="' + p.title.replace(/"/g, "&quot;") + '">Add to Cart</button>';
       }
     }
-  });
-  for (let i = 0; i < 5; i++) {
-    const dir = i % 2 === 0 ? 1 : -1;
-    tl.addLabel("ch" + i, i);
-    const vid = scenes[i].querySelector("video");
-    if (vid) {
-      vid.addEventListener("loadeddata", () => scenes[i].classList.add("has-video"), { once: true });
-      vid.load();
-      const proxy = { p: 0 };
-      tl.to(proxy, { p: 1, ease: "none", duration: 0.97, onUpdate: () => {
-        if (vid.readyState >= 1 && vid.duration) {
-          vid.currentTime = Math.min(vid.duration - 0.06, proxy.p * vid.duration);
-        }
-      } }, i);
-    }
-    tl.fromTo(scenes[i].querySelector("img"),
-      { scale: 1.17, xPercent: 2.4 * dir, yPercent: 1.4 },
-      { scale: 1.03, xPercent: -1.8 * dir, yPercent: -1.2, ease: "none", duration: 1 }, i);
-    tl.fromTo(stages[i], { autoAlpha: 0, y: 36 }, { autoAlpha: 1, y: 0, duration: 0.2 }, i + 0.1);
-    tl.fromTo(stages[i].querySelector(".j-cover"),
-      { yPercent: 14 }, { yPercent: -12, ease: "none", duration: 0.85 }, i + 0.08);
-    tl.fromTo(stages[i].querySelector(".j-card"),
-      { yPercent: 6 }, { yPercent: -5, ease: "none", duration: 0.85 }, i + 0.08);
-    if (i < 4) {
-      tl.to(stages[i], { autoAlpha: 0, y: -24, duration: 0.15 }, i + 0.8);
-      tl.to(scenes[i], { autoAlpha: 0, duration: 0.2 }, i + 0.8);
-      tl.fromTo(scenes[i + 1], { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2 }, i + 0.8);
-    }
-  }
-
-  /* Living atmosphere: drifting mist + light motes */
-  const fx = document.getElementById("jFx");
-  const fctx = fx.getContext("2d");
-  let fxOn = false, W = 0, H = 0;
-  function fxSize() { W = fx.width = fx.offsetWidth; H = fx.height = fx.offsetHeight; }
-  fxSize(); window.addEventListener("resize", fxSize);
-  const motes = Array.from({ length: 38 }, () => ({
-    x: Math.random(), y: Math.random(), r: 1 + Math.random() * 2.2,
-    sx: 0.00004 + Math.random() * 0.00009, sy: 0.00002 + Math.random() * 0.00006,
-    ph: Math.random() * Math.PI * 2, tw: 0.4 + Math.random() * 0.8
-  }));
-  const fogs = Array.from({ length: 3 }, (_, k) => ({
-    x: Math.random(), y: 0.55 + k * 0.14, rx: 0.42 + Math.random() * 0.2, ry: 0.10 + Math.random() * 0.05,
-    s: 0.000018 + Math.random() * 0.000025, o: 0.045 + Math.random() * 0.03
-  }));
-  let last = 0;
-  function fxTick(t) {
-    if (!fxOn) return;
-    const dt = last ? Math.min(t - last, 50) : 16; last = t;
-    fctx.clearRect(0, 0, W, H);
-    fogs.forEach(f => {
-      f.x += f.s * dt; if (f.x > 1.4) f.x = -0.4;
-      const g = fctx.createRadialGradient(f.x * W, f.y * H, 0, f.x * W, f.y * H, f.rx * W);
-      g.addColorStop(0, `rgba(235,242,250,${f.o})`); g.addColorStop(1, "rgba(235,242,250,0)");
-      fctx.fillStyle = g;
-      fctx.save(); fctx.translate(f.x * W, f.y * H); fctx.scale(1, f.ry / f.rx); fctx.translate(-f.x * W, -f.y * H);
-      fctx.beginPath(); fctx.arc(f.x * W, f.y * H, f.rx * W, 0, Math.PI * 2); fctx.fill(); fctx.restore();
+    const coverHtml = coverUrl
+      ? '<img loading="lazy" src="' + coverUrl + '" alt="' + b.title.replace(/"/g, "&quot;") + '">'
+      : '<div class="noimg">' + b.title + '<br>cover coming</div>';
+    const zone = b.zone ? '<div class="tw-zone"><span>' + b.zone + '</span></div>' : '';
+    const side = i % 2 === 1 ? ' right' : '';
+    return zone +
+      '<div class="tw-st' + side + '">' +
+        '<div class="tw-cover">' + coverHtml + '</div>' +
+        '<div class="tw-info">' +
+          '<span class="tw-part">' + b.part + '</span>' +
+          '<h3 class="tw-title">' + b.title + '</h3>' +
+          '<div class="tw-author">by ' + b.author + '</div>' +
+          '<p class="tw-line">' + b.line + '</p>' +
+          '<div class="tw-foot">' + foot + '</div>' +
+        '</div>' +
+      '</div>';
+  }).join("");
+  list.innerHTML = html;
+  list.onclick = e => {
+    const btn = e.target.closest(".tw-btn[data-variant]");
+    if (btn) addToCart(btn);
+  };
+  if (window.gsap && window.ScrollTrigger && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.getAll().forEach(t => { if (t.trigger && t.trigger.closest && t.trigger.closest("#tree")) t.kill(); });
+    gsap.utils.toArray("#tree .tw-st").forEach(el => {
+      gsap.fromTo(el, { autoAlpha: 0, y: 46 }, { autoAlpha: 1, y: 0, duration: .7, ease: "power2.out",
+        scrollTrigger: { trigger: el, start: "top 84%" } });
     });
-    motes.forEach(m => {
-      m.x += m.sx * dt; m.y -= m.sy * dt; m.ph += 0.0011 * dt;
-      if (m.x > 1.02) m.x = -0.02; if (m.y < -0.02) m.y = 1.02;
-      const a = (0.18 + 0.22 * (0.5 + 0.5 * Math.sin(m.ph))) * m.tw;
-      fctx.fillStyle = `rgba(222,190,120,${a})`;
-      fctx.beginPath(); fctx.arc(m.x * W, m.y * H, m.r, 0, Math.PI * 2); fctx.fill();
+    gsap.utils.toArray("#tree .tw-zone").forEach(el => {
+      gsap.fromTo(el, { autoAlpha: 0 }, { autoAlpha: 1, duration: .6, scrollTrigger: { trigger: el, start: "top 88%" } });
     });
-    requestAnimationFrame(fxTick);
   }
-  ScrollTrigger.create({
-    trigger: "#journey", start: "top bottom", end: "bottom top",
-    onToggle: self => { fxOn = self.isActive; last = 0; if (fxOn) requestAnimationFrame(fxTick); }
-  });
-})();
+}
+buildTree([]);
 
 document.getElementById("year").textContent = new Date().getFullYear();
 loadProducts();
