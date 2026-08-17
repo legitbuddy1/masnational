@@ -64,10 +64,11 @@
 
   /* Books */
   /* The Tree */
-  .treewalk{position:relative;background:#f8f4e9;overflow:hidden}
-  .tw-bg{position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(800px,96vw);pointer-events:none;opacity:.42}
-  .tw-bg img{width:100%;display:block}
-  .tw-fadeTop{position:absolute;top:0;left:0;right:0;height:110px;background:linear-gradient(180deg,var(--bg),rgba(248,244,233,0));z-index:1;pointer-events:none}
+  .treewalk{position:relative;background:#fff;overflow:hidden}
+  .tw-bg{position:absolute;inset:0;pointer-events:none;opacity:.5}
+  .tw-bg svg{width:100%;height:100%;display:block}
+  
+  .tw-fadeTop{position:absolute;top:0;left:0;right:0;height:110px;background:linear-gradient(180deg,var(--bg),rgba(255,255,255,0));z-index:1;pointer-events:none}
   .tw-inner{position:relative;max-width:1200px;margin:0 auto;padding:96px 20px 120px;z-index:2}
   .tw-head{text-align:center;margin-bottom:6vh}
   .tw-kick{display:inline-flex;align-items:center;gap:14px;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-dark)}
@@ -87,6 +88,8 @@
   .b3d{width:var(--bw);margin:0 auto}
   .b3d img{width:100%;height:auto;display:block;filter:drop-shadow(16px 22px 28px rgba(46,38,26,.34))}
   .b3d.nofx img{filter:none}
+  .b3d-three canvas{width:100%;height:auto;display:block;filter:drop-shadow(16px 22px 28px rgba(46,38,26,.34));cursor:grab;touch-action:pan-y}
+  .b3d-three canvas:active{cursor:grabbing}
   .tw-spec{font-size:.78rem;color:var(--muted);letter-spacing:.02em;margin:-6px 0 10px}
   .tw-cover .noimg{aspect-ratio:3/4;background:#fff;border:1.5px dashed #d8d2bd;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600;font-size:.9rem;padding:24px;text-align:center;border-radius:8px}
   .tw-info{flex:1;max-width:440px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 30px}
@@ -197,7 +200,6 @@
     <nav class="nav">
       <a href="#tree">The Tree</a>
       <a href="#books">Books</a>
-      <a href="#about">About</a>
       <a class="ext" href="https://muslimamericansociety.org" target="_blank" rel="noopener">muslimamericansociety.org</a>
       <button class="cart-btn" id="cartOpen" aria-label="Open cart">
         Cart <span class="cart-count" id="cartCount">0</span>
@@ -206,23 +208,9 @@
   </div>
 </header>
 
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-copy">
-      <span class="kicker">Nurture People · Inspire Change</span>
-      <h1>Empower minds,<br>one publication at a time.</h1>
-      <p>Original, contextual Islamic books — grounded in authentic methodology, written for the American Muslim. The official MAS Publishing bookstore.</p>
-      <div class="hero-cta">
-        <a class="btn-green" href="#books">Browse the Books</a>
-        <a class="btn-hollow" href="#about">About MAS Publishing</a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <main>
   <section class="treewalk" id="tree" aria-label="The Tree — the MAS Publishing catalog">
-    <div class="tw-bg" aria-hidden="true"><img src="tree1.png" alt=""><img src="tree2.png" alt=""><img src="tree3.png" alt=""></div>
+    <div class="tw-bg" aria-hidden="true"></div>
     <div class="tw-fadeTop" aria-hidden="true"></div>
     <div class="tw-inner">
       <div class="tw-head">
@@ -244,20 +232,6 @@
     <div class="grid" id="grid"></div>
   </section>
 
-  <section class="about" id="about">
-    <div class="about-inner">
-      <div>
-        <h2>One of the four doors of MAS</h2>
-        <p>The eight-sided star in the MAS mark has open walls — doors of opportunity — and each side carries one of the four ways people encounter MAS: Tarbiya, Youth, PACE, and Publishing. This bookstore is that fourth door.</p>
-        <p>MAS Publishing creates books and content that deepen our understanding and practice of Islam — the connection between faith and action, the centrality of self-development, and a charted path for practicing Islam in America.</p>
-        <p class="links"><a href="https://muslimamericansociety.org/publishing/" target="_blank" rel="noopener">About MAS Publishing →</a></p>
-      </div>
-      <div class="about-quote">
-        “When reading is becoming a lost art, it is more important than ever that our words and deeds are grounded in authentic, rich Islamic methodology.”
-        <span class="attrib">— MAS Publishing</span>
-      </div>
-    </div>
-  </section>
 </main>
 
 <footer class="footer">
@@ -295,6 +269,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 const CONFIG = {
   domain: "413ea3.myshopify.com",
@@ -525,22 +500,301 @@ function toast(msg) {
 
 /* ---------- The Tree ---------- */
 const TREE_BOOKS = [
-  { key: "guardians", zone: "The Canopy", part: "The Shade", title: "Guardians of the Houses of Allah", author: "MAS Publishing", line: "The canopy the community gathers under \u2014 for everyone who loves, serves and sustains the houses of Allah.", dims: [6, 0.5, 9], est: true, imgw: 5.78, render: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/mas-guardians-2k.png?v=1786685790", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/frontcover.png" },
-  { key: "tajdid", part: "The Leaves", title: "Tajdid Anthology, Vol. I", author: "Team of Authors", line: "Leaves fall and return \u2014 renewal, season after season. Essays on Islamic work and revival from many pens.", dims: [6, 0.64, 9], pages: 256, imgw: 5.82, render: "tajdid.png?v=s3", cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/Tajdid-Anthology_cc5fa651-48d8-4d20-8930-95fec0549f51.jpg" },
-  { key: "the muslim speaker", part: "The Fruit", title: "The Muslim Speaker Toolkit", author: "Asad Zaman", line: "What the tree hands to others: Qur'an and Sunnah references on fifty topics, gathered for khateebs and teachers.", dims: [6, 0.5, 9], pages: 198, imgw: 5.29, render: "mst.png?v=s3", cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/The-Muslim-Speaker-Toolkit-Compiled-References-from-Quran-Sunnah_b2e22daf-b1a5-48d3-88f5-b5e77e04a563.jpg" },
-  { key: "our youth", part: "The Seeds", title: "Our Youth, Our Future", author: "Ahmad H. Sakr", line: "Seeds for the next tree \u2014 a ten-step guide to raising the generation that carries the baton.", dims: [5.74, 0.41, 8.74], pages: 90, imgw: 5.16, render: "ouryouth.png?v=s3", cover: "https://m.media-amazon.com/images/I/615j8eEbQ+L._SY522_.jpg" },
-  { key: "transformed", zone: "The Branches", part: "The Branches", title: "Transformed by Worship", author: "Salah Soltan", line: "The four great limbs \u2014 how worship was designed to shape soul, character, mind and body.", dims: [5.5, 0.5, 8.5], pages: 197, imgw: 5.45, render: "tbw.png?v=s3", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/E94AB6B1-286F-461C-9B5F-D26C077F645A.jpg" },
-  { key: "cultivating", part: "The Branches", title: "Cultivating Character", author: "Younoos Latheef", line: "The shape the branching takes: twelve character traits through an Islamic lens, for youth and their mentors.", dims: [6, 0.59, 9], pages: 261, imgw: 5.57, render: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/mas-cultivating-2k.png?v=1786686168", cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/cultivating-character-front-cover_05b8174a-7f7c-417c-b816-288758db43aa.png" },
-  { key: "roadblocks:", zone: "The Bark", part: "The Bark", title: "Roadblocks", author: "As-Sayyid Muhammad Nuh", line: "The tree's protection \u2014 the spiritual diseases that rot Islamic work from within, named and treated.", dims: [6, 0.48, 9], pages: 192, imgw: 5.54, render: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/mas-rb1-2k.png?v=1786686501", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/files/RoadLocks.jpg" },
-  { key: "roadblocks volume 2", part: "The Bark", title: "Roadblocks, Volume II", author: "As-Sayyid Muhammad Nuh", line: "The second layer of defense: six more roadblocks, with commentary for the age of feeds and followers.", dims: [6, 0.43, 9], pages: 169, imgw: 5.49, render: "rb2.png?v=s3", cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/Road-Blocks-Volume-2_15d53c98-8680-4a4b-9071-00e2acd79e7c.jpg" },
-  { key: "rising soul", zone: "The Trunk", part: "The Trunk", title: "Rising Soul", author: "Muhammad Mansur", line: "The self, rising ring by ring \u2014 a practical, step-by-step guide to tarbiyat an-nafs.", dims: [5.5, 0.6, 8.5], pages: 240, imgw: 5.12, render: "risingsoul.png?v=s3", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/rising_soul_front_cover.png" },
+  { key: "guardians", zone: "The Canopy", part: "The Shade", title: "Guardians of the Houses of Allah", author: "MAS Publishing", line: "The canopy the community gathers under \u2014 for everyone who loves, serves and sustains the houses of Allah.", dims: [5.55, 0.5, 9], est: true, imgw: 5.78, coverHQ: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/hq-guardians-m.jpg?v=1786691386", render: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/mas-guardians-2k.png?v=1786685790", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/frontcover.png" },
+  { key: "tajdid", part: "The Leaves", title: "Tajdid Anthology, Vol. I", author: "Team of Authors", line: "Leaves fall and return \u2014 renewal, season after season. Essays on Islamic work and revival from many pens.", dims: [6, 0.64, 9], pages: 256, imgw: 5.82, coverHQ: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/hq-tajdid-t.jpg?v=1786691702", render: "tajdid.png", cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/Tajdid-Anthology_cc5fa651-48d8-4d20-8930-95fec0549f51.jpg" },
+  { key: "the muslim speaker", part: "The Fruit", title: "The Muslim Speaker Toolkit", author: "Asad Zaman", line: "What the tree hands to others: Qur'an and Sunnah references on fifty topics, gathered for khateebs and teachers.", dims: [6, 0.5, 9], pages: 198, imgw: 5.29, coverHQ: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/hq-mst.png?v=1786689227", render: "mst.png", cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/The-Muslim-Speaker-Toolkit-Compiled-References-from-Quran-Sunnah_b2e22daf-b1a5-48d3-88f5-b5e77e04a563.jpg" },
+  { key: "our youth", part: "The Seeds", title: "Our Youth, Our Future", author: "Ahmad H. Sakr", line: "Seeds for the next tree \u2014 a ten-step guide to raising the generation that carries the baton.", dims: [5.74, 0.41, 8.74], pages: 90, imgw: 5.16, coverHQ: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/hq-oy-front.jpg?v=1786690568", backHQ: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/hq-oy-back.jpg?v=1786690568", render: "ouryouth.png", cover: "https://m.media-amazon.com/images/I/615j8eEbQ+L._SY522_.jpg" },
+  { key: "transformed", zone: "The Branches", part: "The Branches", title: "Transformed by Worship", author: "Salah Soltan", line: "The four great limbs \u2014 how worship was designed to shape soul, character, mind and body.", dims: [5.5, 0.5, 8.5], pages: 197, imgw: 5.45, coverHQ: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/hq-tbw2.jpg?v=1786690204", render: "tbw.png", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/E94AB6B1-286F-461C-9B5F-D26C077F645A.jpg" },
+  { key: "cultivating", part: "The Branches", title: "Cultivating Character", author: "Younoos Latheef", line: "The shape the branching takes: twelve character traits through an Islamic lens, for youth and their mentors.", dims: [6, 0.59, 9], pages: 261, imgw: 5.57, coverHQ: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/hq-cc-front.jpg?v=1786690204", spineHQ: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/hq-cc-spine.jpg?v=1786690204", backHQ: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/hq-cc-back.jpg?v=1786690204", render: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/mas-cultivating-2k.png?v=1786686168", cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/cultivating-character-front-cover_05b8174a-7f7c-417c-b816-288758db43aa.png" },
+  { key: "roadblocks:", zone: "The Bark", part: "The Bark", title: "Roadblocks", author: "As-Sayyid Muhammad Nuh", line: "The tree's protection \u2014 the spiritual diseases that rot Islamic work from within, named and treated.", dims: [6, 0.48, 9], pages: 192, imgw: 5.54, coverHQ: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/hq-rb1-m.jpg?v=1786691386", render: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/mas-rb1-2k.png?v=1786686501", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/files/RoadLocks.jpg" },
+  { key: "roadblocks volume 2", part: "The Bark", title: "Roadblocks, Volume II", author: "As-Sayyid Muhammad Nuh", line: "The second layer of defense: six more roadblocks, with commentary for the age of feeds and followers.", dims: [6, 0.43, 9], pages: 169, imgw: 5.49, coverHQ: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/hq-rb2-t.jpg?v=1786691702", render: "rb2.png", cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/Road-Blocks-Volume-2_15d53c98-8680-4a4b-9071-00e2acd79e7c.jpg" },
+  { key: "rising soul", zone: "The Trunk", part: "The Trunk", title: "Rising Soul", author: "Muhammad Mansur", line: "The self, rising ring by ring \u2014 a practical, step-by-step guide to tarbiyat an-nafs.", dims: [5.5, 0.6, 8.5], pages: 240, imgw: 5.12, coverHQ: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/risingsoul-hq.png?v=1786688153", render: "risingsoul.png", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/rising_soul_front_cover.png" },
   { key: "tarbiya handbook", part: "The Trunk", title: "Tarbiya Handbook", author: "MAS Publishing", line: "The pattern of growth \u2014 the companion handbook to the tarbiya process itself.", dims: [5.5, 0.5, 8.5], est: true, imgw: 5.26, render: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/mas-tarbiya3d.png?v=1786681497", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/Screen_Shot_2020-01-25_at_1.17.26_PM.png" },
-  { key: "mas revival", part: "The Trunk", title: "MAS Revival", author: "MAS Publishing", line: "The grain of the wood: the idea, method and spirit running through the whole of the work.", dims: [5.5, 0.46, 8.5], pages: 182, imgw: 5.21, render: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/mas-revival-2k.png?v=1786686501", cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/Revival-1_bcc96c73-9f2d-4227-b87b-7a7a3403fe67.png" },
-  { key: "sincerity", zone: "The Heartwood", part: "The Heartwood", title: "Sincerity", author: "Yusuf al-Qaradawi", line: "The hidden center that decides whether the whole tree is sound \u2014 keeping the heart's intention pure.", dims: [5.5, 0.16, 8.5], pages: 61, imgw: 5.01, render: "sincerity.png?v=s3", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/sincerity_front_cover.png" },
-  { key: "faith first", zone: "The Roots", part: "The Roots", title: "Faith First", author: "Magdy al-Hilali", line: "The taproot. Begin with iman, and everything else follows.", dims: [7.5, 0.92, 9.25], pages: 408, imgw: 6.38, render: "ff-ali.png?v=s3", cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/products/51bvjyDFT5S.jpg?width=810" },
-  { key: "how to love", part: "The Roots", title: "How to Love the Prophet \ufdfa", author: "Ali Badahdah", line: "The root wrapped around the Sunnah \u2014 kindling love for the one we follow \ufdfa.", dims: [6, 0.2, 9], pages: 79, imgw: 4.91, render: "htlp.png?v=s3", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/14A7B9D4-28BE-46E9-8EC6-4A7CC305D94A.png" },
-  { key: "al-ma", part: "The Roots", title: "Al-Ma'thurat", author: "Hasan al-Banna", line: "What the roots drink daily \u2014 morning and evening remembrance drawn from Qur'an and Sunnah.", dims: [4.5, 0.3, 7], pages: 40, est: true, imgw: 3.51, render: "mathurat2.png?v=s3", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/files/D14CCE8C-A13A-4EFE-83ED-FE6D498CF27F.jpg" }
+  { key: "mas revival", part: "The Trunk", title: "MAS Revival", author: "MAS Publishing", line: "The grain of the wood: the idea, method and spirit running through the whole of the work.", dims: [5.5, 0.46, 8.5], pages: 182, imgw: 5.21, coverHQ: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/hq-revival-t2.jpg?v=1786691902", render: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/mas-revival-2k.png?v=1786686501", cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/Revival-1_bcc96c73-9f2d-4227-b87b-7a7a3403fe67.png" },
+  { key: "sincerity", zone: "The Heartwood", part: "The Heartwood", title: "Sincerity", author: "Yusuf al-Qaradawi", line: "The hidden center that decides whether the whole tree is sound \u2014 keeping the heart's intention pure.", dims: [5.5, 0.16, 8.5], pages: 61, noSpineText: true, imgw: 5.01, coverHQ: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/hq-sincerity.png?v=1786689226", render: "sincerity.png", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/sincerity_front_cover.png" },
+  { key: "faith first", zone: "The Roots", part: "The Roots", title: "Faith First", author: "Magdy al-Hilali", line: "The taproot. Begin with iman, and everything else follows.", dims: [7.5, 0.92, 9.25], pages: 408, imgw: 6.38, three: true, coverHQ: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/hq-ff-front2.jpg?v=1786691025", spineHQ: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/hq-ff-spine.jpg?v=1786690204", backHQ: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/hq-ff-back2.jpg?v=1786691025", spineTitle: "FAITH FIRST", spineAuthor: "MAGDY AL-HILALI", render: "ff-ali.png", cover: "https://cdn.shopify.com/s/files/1/0760/5724/8026/products/51bvjyDFT5S.jpg?width=810" },
+  { key: "how to love", part: "The Roots", title: "How to Love the Prophet \ufdfa", author: "Ali Badahdah", line: "The root wrapped around the Sunnah \u2014 kindling love for the one we follow \ufdfa.", dims: [6, 0.2, 9], pages: 79, imgw: 4.91, coverHQ: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/hq-htlp2.jpg?v=1786690204", render: "htlp.png", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/products/14A7B9D4-28BE-46E9-8EC6-4A7CC305D94A.png" },
+  { key: "al-ma", part: "The Roots", title: "Al-Ma'thurat", author: "Hasan al-Banna", line: "What the roots drink daily \u2014 morning and evening remembrance drawn from Qur'an and Sunnah.", dims: [6, 0.12, 7], pages: 40, est: true, noSpineText: true, imgw: 3.51, coverHQ: "https://cdn.shopify.com/s/files/1/0760/5724/8026/files/hq-mathurat-t2.jpg?v=1786691902", render: "mathurat2.png", cover: "https://cdn.shopify.com/s/files/1/0073/6231/4343/files/D14CCE8C-A13A-4EFE-83ED-FE6D498CF27F.jpg" }
 ];
+
+/* ---------- 3D book (Stripe Press style) ---------- */
+const __threeBooks = [];
+function initThreeBooks(list) {
+  if (!window.THREE) return;
+  // dispose previous instances (buildTree re-renders)
+  while (__threeBooks.length) {
+    const tb = __threeBooks.pop();
+    cancelAnimationFrame(tb.raf);
+    tb.renderer.dispose();
+  }
+  list.querySelectorAll(".b3d-three").forEach(holder => {
+    const b = TREE_BOOKS[+holder.dataset.tb];
+    try { initThreeBook(holder, b); }
+    catch (e) {
+      console.error("3D book failed, falling back", e);
+      holder.innerHTML = '<img loading="lazy" src="' + b.render + '" alt="">';
+    }
+  });
+}
+function initThreeBook(holder, b) {
+  const W = b.dims[0], D = b.dims[1], H = b.dims[2];
+  const ct = 0.018; // paperback card stock
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  const cw = Math.max(120, holder.clientWidth);
+  const ch = Math.round(cw * (H + 0.7) / (W + 1.3));
+  renderer.setPixelRatio(dpr);
+  renderer.setSize(cw, ch);
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  holder.appendChild(renderer.domElement);
+  const scene = new THREE.Scene();
+  const cam = new THREE.PerspectiveCamera(26, cw / ch, 0.1, 100);
+  cam.position.set(0.4, 0.15, (H / 2) / Math.tan(13 * Math.PI / 180) * 1.14);
+  cam.lookAt(0, 0, 0);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.42));
+  scene.add(new THREE.HemisphereLight(0xfff8ee, 0xd0c6b4, 0.30));
+  const key = new THREE.DirectionalLight(0xffffff, 0.74);
+  key.position.set(3.5, 4, 4.5);
+  scene.add(key);
+  const fill = new THREE.DirectionalLight(0xffe9d0, 0.18);
+  fill.position.set(-4, 1, 3);
+  scene.add(fill);
+  const rim = new THREE.DirectionalLight(0xffffff, 0.34);
+  rim.position.set(-2, 2, -4);
+  scene.add(rim);
+  const group = new THREE.Group();
+  scene.add(group);
+  const mat = (c, r) => new THREE.MeshStandardMaterial({ color: c, roughness: r == null ? 0.85 : r, metalness: 0 });
+  const side = holder.closest(".tw-st").classList.contains("right") ? 1 : -1;
+  const state = { rest: side * 0.30, scroll: 0, drag: 0, idleT: Math.random() * 9, dragging: false, visible: true, renderer, raf: 0 };
+  __threeBooks.push(state);
+  const loader = new THREE.TextureLoader();
+  loader.crossOrigin = "anonymous";
+  const loadTex = url => new Promise((res, rej) => loader.load(url, t => {
+    t.encoding = THREE.sRGBEncoding;
+    t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    res(t);
+  }, undefined, rej));
+  Promise.all([
+    loadTex(b.coverHQ || (b.cover.split("?")[0] + "?width=1024")),
+    b.spineHQ ? loadTex(b.spineHQ) : Promise.resolve(null),
+    b.backHQ ? loadTex(b.backHQ) : Promise.resolve(null)
+  ]).then(arr => build(arr[0], arr[1], arr[2])).catch(e => {
+    console.error("texture load failed", e);
+    holder.innerHTML = '<img loading="lazy" src="' + b.render + '" alt="">';
+  });
+  function grainTexture() {
+    const c = document.createElement("canvas"); c.width = 256; c.height = 256;
+    const x = c.getContext("2d");
+    const img = x.createImageData(256, 256);
+    for (let i = 0; i < img.data.length; i += 4) {
+      const v = 118 + (Math.random() * 42 | 0);
+      img.data[i] = img.data[i+1] = img.data[i+2] = v;
+      img.data[i+3] = 255;
+    }
+    x.putImageData(img, 0, 0);
+    const t = new THREE.CanvasTexture(c);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    return t;
+  }
+  function paperTexture() {
+    const c = document.createElement("canvas"); c.width = 512; c.height = 256;
+    const x = c.getContext("2d");
+    x.fillStyle = "#f2efe4"; x.fillRect(0, 0, 512, 256);
+    // fine per-page ridges with warm tonal jitter
+    for (let i = 0; i < 512; i++) {
+      const v = 190 + (Math.random() * 60 | 0);
+      x.fillStyle = "rgb(" + v + "," + (v - 4) + "," + (v - 15) + ")";
+      x.globalAlpha = 0.4 + Math.random() * 0.6;
+      x.fillRect(i, 0, 1, 256);
+    }
+    // occasional deeper gaps where signatures gather
+    x.globalAlpha = 1;
+    for (let i = 0; i < 52; i++) {
+      x.fillStyle = "rgba(112,100,78,0.7)";
+      x.fillRect(Math.random() * 512 | 0, 0, 1 + (Math.random() < 0.3 ? 1 : 0), 256);
+    }
+    const t = new THREE.CanvasTexture(c);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    return t;
+  }
+  function samplePalette(coverImg) {
+    const c = document.createElement("canvas"); c.width = 40; c.height = 40;
+    const x = c.getContext("2d");
+    x.drawImage(coverImg, 0, 0, 40, 40);
+    const d = x.getImageData(0, 0, 40, 40).data;
+    let dr = 0, dg = 0, db = 0, dn = 0, er = 0, eg = 0, eb = 0, en = 0;
+    for (let i = 0; i < d.length; i += 4) {
+      const lum = 0.299 * d[i] + 0.587 * d[i+1] + 0.114 * d[i+2];
+      const col = (i / 4) % 40;
+      if (lum < 150) { dr += d[i]; dg += d[i+1]; db += d[i+2]; dn++; }
+      if (col < 3) { er += d[i]; eg += d[i+1]; eb += d[i+2]; en++; }
+    }
+    const dark = dn > 8 ? [dr/dn|0, dg/dn|0, db/dn|0] : [70, 65, 90];
+    const edge = en ? [er/en|0, eg/en|0, eb/en|0] : dark;
+    const toHex = a => (a[0] << 16) + (a[1] << 8) + a[2];
+    const edgeLum = 0.299 * edge[0] + 0.587 * edge[1] + 0.114 * edge[2];
+    return { darkHex: toHex(dark), edgeHex: toHex(edge), edgeLight: edgeLum > 150 };
+  }
+  function spineTexture(coverImg, pal) {
+    const c = document.createElement("canvas"); c.width = 160; c.height = 1600;
+    const x = c.getContext("2d");
+    // wrap the cover's left edge around the spine
+    x.drawImage(coverImg, 0, 0, coverImg.width * 0.035, coverImg.height, 0, 0, 160, 1600);
+    if (b.noSpineText) {
+      const t0 = new THREE.CanvasTexture(c);
+      t0.encoding = THREE.sRGBEncoding;
+      return t0;
+    }
+    const ink = pal.edgeLight ? "rgba(40,40,55," : "rgba(255,255,255,";
+    x.textAlign = "center";
+    x.save();
+    x.translate(80, 800);
+    x.rotate(Math.PI / 2);
+    x.font = "700 60px Figtree, Helvetica, sans-serif";
+    x.fillStyle = ink + ".92)";
+    const title = (b.spineTitle || b.title).toUpperCase().slice(0, 26);
+    x.fillText(title, -170, 20);
+    x.font = "500 32px Figtree, Helvetica, sans-serif";
+    x.fillStyle = ink + ".72)";
+    x.fillText((b.spineAuthor || b.author || "").toUpperCase().slice(0, 30), 500, 12);
+    x.restore();
+    const t = new THREE.CanvasTexture(c);
+    t.encoding = THREE.sRGBEncoding;
+    return t;
+  }
+  function roundedRect(w, h, rSpine, rFore) {
+    const sh = new THREE.Shape();
+    const x0 = -w / 2, y0 = -h / 2, x1 = w / 2, y1 = h / 2;
+    sh.moveTo(x0 + rSpine, y0);
+    sh.lineTo(x1 - rFore, y0);
+    sh.quadraticCurveTo(x1, y0, x1, y0 + rFore);
+    sh.lineTo(x1, y1 - rFore);
+    sh.quadraticCurveTo(x1, y1, x1 - rFore, y1);
+    sh.lineTo(x0 + rSpine, y1);
+    sh.quadraticCurveTo(x0, y1, x0, y1 - rSpine);
+    sh.lineTo(x0, y0 + rSpine);
+    sh.quadraticCurveTo(x0, y0, x0 + rSpine, y0);
+    return sh;
+  }
+  function coverGeo(w, h, bowAmp, flipT) {
+    const g = new THREE.ExtrudeGeometry(roundedRect(w, h, 0.015, 0.06), {
+      depth: ct, bevelEnabled: false, curveSegments: 10
+    });
+    // paperback bow: board curls gently toward the fore-edge, always AWAY from the pages
+    const pos = g.attributes.position;
+    for (let i = 0; i < pos.count; i++) {
+      let t = Math.max(0, (pos.getX(i) + w / 2) / w);
+      if (flipT) t = 1 - t;
+      pos.setZ(i, pos.getZ(i) + bowAmp * Math.pow(t, 1.7));
+    }
+    g.computeVertexNormals();
+    return g;
+  }
+  function capUV(tex, w, h) {
+    tex.wrapS = tex.wrapT = THREE.ClampToEdgeWrapping;
+    tex.repeat.set(1 / w, 1 / h);
+    tex.offset.set(0.5, 0.5);
+    return tex;
+  }
+  function edgeAO(img) {
+    const c = document.createElement("canvas"); c.width = img.width; c.height = img.height;
+    const x = c.getContext("2d");
+    x.drawImage(img, 0, 0);
+    const w = c.width, h = c.height, m = Math.round(Math.min(w, h) * 0.04);
+    const mk = (x0, y0, x1, y1) => {
+      const g = x.createLinearGradient(x0, y0, x1, y1);
+      g.addColorStop(0, "rgba(58,48,38,0.08)");
+      g.addColorStop(1, "rgba(58,48,38,0)");
+      return g;
+    };
+    x.fillStyle = mk(0, 0, m, 0); x.fillRect(0, 0, m, h);
+    x.fillStyle = mk(w, 0, w - m, 0); x.fillRect(w - m, 0, m, h);
+    x.fillStyle = mk(0, 0, 0, m); x.fillRect(0, 0, w, m);
+    x.fillStyle = mk(0, h, 0, h - m); x.fillRect(0, h - m, w, m);
+    const t = new THREE.CanvasTexture(c);
+    t.encoding = THREE.sRGBEncoding;
+    return t;
+  }
+  function build(coverTex, spineHQTex, backHQTex) {
+    const coverImg = coverTex.image;
+    const pal = samplePalette(coverImg);
+    const paper = paperTexture();
+    const paperMat = new THREE.MeshStandardMaterial({ map: paper, roughness: 1, metalness: 0, bumpMap: paper, bumpScale: 0.02 });
+    const edge = mat(0xf6f3ea, 0.9);
+    // page block — slightly inset, flush at spine
+    const pages = new THREE.Mesh(new THREE.BoxGeometry(W - 0.03, H - 0.03, D),
+      [paperMat, mat(0xe9e5d8), paperMat, paperMat, mat(0xf4f1e8), mat(0xf4f1e8)]);
+    pages.position.x = -0.015;
+    group.add(pages);
+    // front cover — rounded, beveled, bowed
+    const grain = grainTexture();
+    const aoTex = edgeAO(coverImg);
+    aoTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    const coverMat = new THREE.MeshStandardMaterial({ map: capUV(aoTex, W, H), roughness: 0.58, metalness: 0, bumpMap: grain, bumpScale: 0.0028, roughnessMap: grain });
+    const front = new THREE.Mesh(coverGeo(W, H, 0.055), [coverMat, edge]);
+    front.position.z = D / 2;
+    group.add(front);
+    // back cover — palette tone, bowed the other way
+    const backMat = backHQTex
+      ? new THREE.MeshStandardMaterial({ map: capUV(backHQTex, W, H), roughness: 0.6, metalness: 0, bumpMap: grain, bumpScale: 0.0028 })
+      : new THREE.MeshStandardMaterial({ color: pal.darkHex, roughness: 0.62, metalness: 0, bumpMap: grain, bumpScale: 0.0028 });
+    const back = new THREE.Mesh(coverGeo(W, H, 0.05, true), [backMat, edge]);
+    back.rotation.y = Math.PI;
+    back.position.z = -(D / 2);
+    group.add(back);
+    // spine — rounded outer corners, cover-edge wrap texture
+    const sTex = capUV(spineHQTex || spineTexture(coverImg, pal), D + 2 * ct, H);
+    const spineMat = new THREE.MeshStandardMaterial({ map: sTex, roughness: 0.58, metalness: 0, bumpMap: grain, bumpScale: 0.0028 });
+    const sGeo = new THREE.ExtrudeGeometry(roundedRect(D + 2 * ct, H, 0.02, 0.02), {
+      depth: ct, bevelEnabled: false, curveSegments: 10
+    });
+    const spine = new THREE.Mesh(sGeo, [spineMat, mat(pal.edgeHex, 0.75)]);
+    spine.rotation.y = -Math.PI / 2;
+    spine.position.x = -(W / 2 + ct);
+    spine.position.z = 0;
+    group.add(spine);
+    group.rotation.y = state.rest;
+  }
+  // drag to spin
+  let px = 0;
+  renderer.domElement.addEventListener("pointerdown", e => {
+    state.dragging = true; px = e.clientX;
+    renderer.domElement.setPointerCapture(e.pointerId);
+  });
+  renderer.domElement.addEventListener("pointermove", e => {
+    if (!state.dragging) return;
+    state.drag += (e.clientX - px) * 0.008;
+    px = e.clientX;
+  });
+  const endDrag = () => { state.dragging = false; };
+  renderer.domElement.addEventListener("pointerup", endDrag);
+  renderer.domElement.addEventListener("pointercancel", endDrag);
+  // scroll-linked turn
+  if (window.gsap && window.ScrollTrigger) {
+    const proxy = { v: side * 0.42 };
+    gsap.to(proxy, {
+      v: 0, ease: "none",
+      scrollTrigger: { trigger: holder.closest(".tw-st"), start: "top 96%", end: "center 58%", scrub: 0.35 },
+      onUpdate: () => { state.scroll = proxy.v; }
+    });
+  }
+  // pause offscreen
+  new IntersectionObserver(en => { state.visible = en[0].isIntersecting; }, { rootMargin: "120px" }).observe(holder);
+  // render loop
+  const tick = () => {
+    state.raf = requestAnimationFrame(tick);
+    if (!state.visible || document.hidden) return;
+    state.idleT += 0.016;
+    if (!state.dragging) state.drag *= 0.94; // ease back after spin
+    const idle = Math.sin(state.idleT * 0.7) * 0.045 + Math.sin(state.idleT * 0.31) * 0.02;
+    group.rotation.y = state.rest + state.scroll + state.drag + idle;
+    group.rotation.x = Math.sin(state.idleT * 0.43) * 0.012;
+    group.position.y = Math.sin(state.idleT * 0.55) * 0.04;
+    renderer.render(scene, cam);
+  };
+  tick();
+}
 
 function buildTree(products) {
   const list = document.getElementById("twList");
@@ -560,7 +814,9 @@ function buildTree(products) {
     }
     const alt = b.title.replace(/"/g, "&quot;");
     let coverHtml;
-    if (b.render) {
+    if (b.dims && window.THREE) {
+      coverHtml = '<div class="b3d b3d-three" data-tb="' + i + '" style="--bw:calc(var(--ppi)*' + (b.dims[0] + 1.3) + ')"></div>';
+    } else if (b.render) {
       coverHtml = '<div class="b3d' + (b.nofx ? ' nofx' : '') + '" style="--bw:calc(var(--ppi)*' + b.imgw + ')">' +
         '<img loading="lazy" src="' + b.render + '" alt="' + alt + '">' +
       '</div>';
@@ -572,13 +828,12 @@ function buildTree(products) {
     const spec = (b.pages && b.dims && !b.est)
       ? '<div class="tw-spec">' + b.pages + ' pages · ' + b.dims[0] + ' × ' + b.dims[2] + '&Prime; paperback</div>'
       : '';
-    const zone = b.zone ? '<div class="tw-zone"><span>' + b.zone + '</span></div>' : '';
+    const zone = '';
     const side = i % 2 === 1 ? ' right' : '';
     return zone +
       '<div class="tw-st' + side + (b.render ? ' b3d-st' : '') + '">' +
         '<div class="tw-cover">' + coverHtml + '</div>' +
         '<div class="tw-info">' +
-          '<span class="tw-part">' + b.part + '</span>' +
           '<h3 class="tw-title">' + b.title + '</h3>' +
           '<div class="tw-author">by ' + b.author + '</div>' +
           spec +
@@ -592,6 +847,7 @@ function buildTree(products) {
     const btn = e.target.closest(".tw-btn[data-variant]");
     if (btn) addToCart(btn);
   };
+  initThreeBooks(list);
   if (window.gsap && window.ScrollTrigger && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     gsap.registerPlugin(ScrollTrigger);
     ScrollTrigger.getAll().forEach(t => {
@@ -606,6 +862,15 @@ function buildTree(products) {
       gsap.fromTo(el, { autoAlpha: 0, y: 46 }, { autoAlpha: 1, y: 0, duration: .7, ease: "power2.out",
         scrollTrigger: { trigger: el, start: "top 84%" } });
     });
+    // scroll-scrubbed book rotation: turns to face you as its station reaches center
+    gsap.utils.toArray("#tree .tw-st .b3d img").forEach(img => {
+      const st = img.closest(".tw-st");
+      const dir = st.classList.contains("right") ? 1 : -1;
+      gsap.fromTo(img,
+        { rotationY: dir * 24, y: 34, transformPerspective: 1000 },
+        { rotationY: 0, y: 0, ease: "none",
+          scrollTrigger: { trigger: st, start: "top 96%", end: "center 58%", scrub: 0.35 } });
+    });
   }
 }
 buildTree([]);
@@ -613,6 +878,167 @@ buildTree([]);
 document.getElementById("year").textContent = new Date().getFullYear();
 loadProducts();
 getCart();
+
+// procedural SVG tree: generated to fit the section, per-branch spring physics
+(function () {
+  const NS = "http://www.w3.org/2000/svg";
+  const bg = document.querySelector(".tw-bg");
+  const section = document.querySelector(".treewalk");
+  if (!bg || !section) return;
+  const rand = (function (seed) { let s = seed; return function () { s = (s * 1664525 + 1013904223) % 4294967296; return s / 4294967296; }; })(20260814);
+  const R = (a, b) => a + rand() * (b - a);
+  const LEAF_COLS = ["#5f8c36", "#6f9e42", "#82b052", "#527c2c", "#8cba5e", "#79a748", "#679640"];
+  const BARK = "#8a7e6c", BARK_D = "#75695a";
+  let branches = [], leafClusters = [], svg = null, rafOn = false, visible = true;
+
+  function el(name, attrs, parent) {
+    const e = document.createElementNS(NS, name);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  function leaf(g, x, y, ang, s) {
+    el("ellipse", { cx: x, cy: y, rx: 6.4 * s, ry: 3.1 * s,
+      transform: "rotate(" + (ang * 180 / Math.PI + R(-46, 46)) + " " + x + " " + y + ")",
+      fill: LEAF_COLS[Math.floor(rand() * LEAF_COLS.length)], opacity: R(0.85, 1) }, g);
+  }
+
+  function branch(parent, x, y, ang, len, w, gen, maxGen) {
+    const g = el("g", {}, parent);
+    const ex = x + Math.cos(ang) * len, ey = y + Math.sin(ang) * len;
+    const mx = (x + ex) / 2 + Math.cos(ang - Math.PI / 2) * len * R(-0.09, 0.09);
+    const my = (y + ey) / 2 + Math.sin(ang - Math.PI / 2) * len * R(-0.09, 0.09);
+    el("path", { d: "M" + x.toFixed(1) + " " + y.toFixed(1) + " Q" + mx.toFixed(1) + " " + my.toFixed(1) + " " + ex.toFixed(1) + " " + ey.toFixed(1),
+      stroke: gen > 1 ? BARK : BARK_D, "stroke-width": Math.max(w, 0.7).toFixed(1),
+      fill: "none", "stroke-linecap": "round" }, g);
+    const dir = Math.abs(Math.cos(ang)) < 0.2 ? (rand() < 0.5 ? 1 : -1) : Math.sign(Math.cos(ang));
+    branches.push({ g: g, px: x, py: y, gen: gen, dir: dir,
+      a: 0, av: 0, k: R(0.02, 0.034), c: R(0.09, 0.15), gain: (0.5 + gen * 0.42) * R(0.8, 1.2) });
+    if (gen < maxGen && len > 22) {
+      const n = gen < 2 ? 2 : (rand() < 0.6 ? 2 : 3);
+      for (let i = 0; i < n; i++) {
+        const t = i === 0 ? 1 : R(0.55, 0.85);
+        const bx = x + (ex - x) * t, by = y + (ey - y) * t;
+        let na = ang + R(0.24, 0.62) * (i % 2 === 0 ? 1 : -1);
+        na = Math.atan2(Math.sin(na) - 0.24, Math.cos(na));
+        branch(g, bx, by, na, len * R(0.62, 0.78), w * 0.62, gen + 1, maxGen);
+      }
+    } else {
+      const lg = el("g", {}, g);
+      const n = Math.max(5, Math.floor(len / 4.5));
+      for (let i = 0; i < n; i++) {
+        const t = R(0.25, 1.05);
+        leaf(lg, x + (ex - x) * t + R(-7, 7), y + (ey - y) * t + R(-7, 7), ang, R(0.8, 1.4));
+      }
+      leafClusters.push({ g: lg, px: ex, py: ey, a: 0, av: 0, k: R(0.05, 0.09), c: R(0.06, 0.1), gain: R(1.6, 2.6), dir: rand() < 0.5 ? 1 : -1 });
+    }
+  }
+
+  function root(parent, x, y, ang, len, w, gen, H) {
+    if (Math.sin(ang) > 0.15) len = Math.min(len, (H - 26 - y) / Math.sin(ang));
+    if (len < 8) return;
+    const ex = x + Math.cos(ang) * len, ey = y + Math.sin(ang) * len;
+    const mx = (x + ex) / 2 + Math.cos(ang + Math.PI / 2) * len * R(-0.22, 0.22);
+    const my = (y + ey) / 2 + Math.abs(Math.sin(ang + Math.PI / 2) * len) * 0.18;
+    el("path", { d: "M" + x.toFixed(1) + " " + y.toFixed(1) + " Q" + mx.toFixed(1) + " " + my.toFixed(1) + " " + ex.toFixed(1) + " " + ey.toFixed(1),
+      stroke: BARK_D, "stroke-width": Math.max(w, 0.6).toFixed(1), fill: "none", "stroke-linecap": "round" }, parent);
+    if (gen < 4 && len > 14 && w > 0.7) {
+      const n = gen < 1 ? 3 : 2;
+      for (let i = 0; i < n; i++) {
+        const t = R(0.45, 1);
+        let na = ang + R(0.2, 0.5) * (i % 2 === 0 ? 1 : -1);
+        na = Math.atan2(Math.sin(na) + 0.3, Math.cos(na));
+        root(parent, x + (ex - x) * t, y + (ey - y) * t, na, len * R(0.52, 0.68), w * 0.55, gen + 1, H);
+      }
+    }
+  }
+
+  function build() {
+    branches = []; leafClusters = [];
+    if (svg) svg.remove();
+    const W = section.clientWidth, H = section.clientHeight;
+    svg = el("svg", { viewBox: "0 0 " + W + " " + H, width: "100%", height: "100%", preserveAspectRatio: "none" });
+    bg.appendChild(svg);
+    const cx = W / 2;
+    const topY = H * 0.048, rootY = H - H * 0.16, baseW = Math.max(26, W * 0.022), rootZone = Math.min(H * 0.15, W * 0.85);
+    // trunk: tapered wavy polygon
+    const pts = [], steps = 26;
+    for (let i = 0; i <= steps; i++) {
+      const t = i / steps;
+      const y = rootY + (topY - rootY) * t;
+      const wob = Math.sin(t * 5.1 + 1.3) * baseW * 0.28 * (1 - t * 0.5);
+      pts.push([cx + wob, y, (baseW * (1 - t * 0.78)) / 2]);
+    }
+    let dL = "M", dR = "";
+    for (let i = 0; i < pts.length; i++) dL += (i ? " L" : "") + (pts[i][0] - pts[i][2]).toFixed(1) + " " + pts[i][1].toFixed(1);
+    for (let i = pts.length - 1; i >= 0; i--) dR += " L" + (pts[i][0] + pts[i][2]).toFixed(1) + " " + pts[i][1].toFixed(1);
+    el("path", { d: dL + dR + " Z", fill: BARK }, svg);
+    // crown: dense canopy spreading to both edges
+    const crownBase = topY + H * 0.035;
+    const reach = W * 0.5;
+    const fan = [-0.5, -0.66, -0.34, -0.8, -0.2];
+    for (let i = 0; i < fan.length; i++) {
+      branch(svg, cx, crownBase - (H * 0.004) * i, Math.PI * fan[i], reach * R(0.24, 0.3), 8 - i, 0, 4);
+    }
+    branch(svg, cx, crownBase + H * 0.012, -Math.PI * 0.94, reach * 0.42, 8, 0, 4);
+    branch(svg, cx, crownBase + H * 0.012, -Math.PI * 0.06, reach * 0.42, 8, 0, 4);
+    // mid-trunk side branches down the zones
+    const midTop = topY + H * 0.16, midBot = H * 0.66;
+    const nMid = 7;
+    for (let i = 0; i < nMid; i++) {
+      const y = midTop + (midBot - midTop) * (i / (nMid - 1)) + R(-H * 0.01, H * 0.01);
+      const side = i % 2 === 0 ? 1 : -1;
+      const ang = side > 0 ? R(-0.34, -0.1) : Math.PI - R(-0.34, -0.1) * -1;
+      const a2 = side > 0 ? R(-0.52, -0.14) : Math.PI + R(0.14, 0.52);
+      branch(svg, cx + side * baseW * 0.3, y, a2, W * R(0.17, 0.26) * (1 - 0.3 * (y / H)), 6, 1, 3);
+    }
+    // roots
+    const nR = 10;
+    for (let i = 0; i < nR; i++) {
+      const a = Math.PI * (0.1 + 0.8 * (i / (nR - 1))) + R(-0.05, 0.05);
+      root(svg, cx + R(-1, 1) * baseW * 0.4, rootY - 4, a, rootZone * R(0.2, 0.3) * (1 + Math.abs(Math.cos(a)) * 1.4), baseW * 0.4, 0, H);
+    }
+  }
+
+  // physics: wind driven by scroll velocity, underdamped springs per branch
+  let wind = 0, wv = 0, target = 0, lastY = window.scrollY, lastT = performance.now(), idle = 0;
+  function tick(now) {
+    if (!rafOn) return;
+    const dt = Math.min(2.5, (now - lastT) / 16.7); lastT = now;
+    const y = window.scrollY, v = (y - lastY) / Math.max(dt, 0.001); lastY = y;
+    const tv = Math.max(-1, Math.min(1, v / 260));
+    if (Math.abs(tv) > Math.abs(target)) target = tv; else target *= Math.pow(0.86, dt);
+    wv += (-0.02 * (wind - target) - 0.09 * wv) * dt; wind += wv * dt * 16.7 * 0.06;
+    idle += 0.012 * dt;
+    const breeze = Math.sin(idle) * 0.05 + Math.sin(idle * 0.37 + 2) * 0.035;
+    const w = wind + breeze;
+    if (visible) {
+      for (let i = 0; i < branches.length; i++) {
+        const b = branches[i];
+        const tg = w * b.gain * b.dir * 4.2;
+        b.av += (-b.k * (b.a - tg) - b.c * b.av) * dt; b.a += b.av * dt * 16.7 * 0.06;
+        b.g.setAttribute("transform", "rotate(" + b.a.toFixed(3) + " " + b.px.toFixed(1) + " " + b.py.toFixed(1) + ")");
+      }
+      for (let i = 0; i < leafClusters.length; i++) {
+        const b = leafClusters[i];
+        const tg = w * b.gain * b.dir * 3.4;
+        b.av += (-b.k * (b.a - tg) - b.c * b.av) * dt; b.a += b.av * dt * 16.7 * 0.06;
+        b.g.setAttribute("transform", "rotate(" + b.a.toFixed(3) + " " + b.px.toFixed(1) + " " + b.py.toFixed(1) + ")");
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+  function start() { if (!rafOn) { rafOn = true; lastT = performance.now(); lastY = window.scrollY; requestAnimationFrame(tick); } }
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }, { rootMargin: "200px" }).observe(section);
+  }
+  build(); start();
+  let rt = null;
+  window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(build, 350); });
+  window.addEventListener("load", function () { setTimeout(build, 600); });
+  window.twTreeRebuild = build;
+})();
 </script>
 </body>
 </html>
